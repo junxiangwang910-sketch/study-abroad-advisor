@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyPath AI | 留学申请智能规划</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#advisor">
+        <span class="brand-mark">S</span>
+        <span>
+          <strong>StudyPath AI</strong>
+          <small>留学申请智能规划</small>
+        </span>
+      </a>
+      <nav>
+        <a href="#advisor">申请评估</a>
+        <a href="#personality">性格能力测试</a>
+        <a href="#sample">建议结构</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-image" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Application Strategy</p>
+          <h1>把学校定位、成绩、经历和个人特质放在一起判断。</h1>
+          <p>输入目标学校档次、当前背景和经历，再完成一组性格能力测试，系统会生成选校梯度、申请风险、背景补强方向和接下来 90 天行动计划。</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#advisor">开始评估</a>
+            <a class="secondary-button" href="#sample">查看建议结构</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="advisor-grid" id="advisor">
+        <form class="input-panel" id="advisorForm">
+          <div class="section-title">
+            <p class="eyebrow">Profile</p>
+            <h2>申请背景</h2>
+          </div>
+
+          <div class="field-row">
+            <label class="field">
+              <span>目标国家 / 地区</span>
+              <select id="destination">
+                <option value="us">美国</option>
+                <option value="uk">英国</option>
+                <option value="ca">加拿大</option>
+                <option value="au">澳洲</option>
+                <option value="sg">新加坡 / 香港</option>
+                <option value="mixed">多地区混申</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>目标学校档次</span>
+              <select id="schoolTier">
+                <option value="elite">顶尖名校：Top 20 / G5 / 港新头部</option>
+                <option value="high" selected>高竞争：Top 50 / QS 100</option>
+                <option value="solid">稳健提升：Top 100-200</option>
+                <option value="practical">就业导向：排名适中但项目强</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label class="field">
+              <span>当前学历阶段</span>
+              <select id="stage">
+                <option value="undergrad">本科申请</option>
+                <option value="master" selected>硕士申请</option>
+                <option value="phd">博士 / 研究型申请</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>目标专业方向</span>
+              <select id="major">
+                <option value="business">商科 / 管理 / 金融</option>
+                <option value="cs" selected>计算机 / 数据 / AI</option>
+                <option value="engineering">工程 / 理科</option>
+                <option value="social">社科 / 教育 / 公共政策</option>
+                <option value="art">艺术 / 设计 / 传媒</option>
+                <option value="health">医学健康 / 生物相关</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label class="field">
+              <span>GPA / 均分</span>
+              <input id="gpa" type="number" min="0" max="100" step="0.1" value="86" placeholder="例如 86 或 3.6">
+            </label>
+            <label class="field">
+              <span>本科院校背景</span>
+              <select id="schoolBackground">
+                <option value="top">985 / 211 / 海外强校</option>
+                <option value="mid" selected>双非一本 / 普通海外院校</option>
+                <option value="regular">普通本科 / 转专业背景</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label class="field">
+              <span>语言成绩</span>
+              <input id="languageScore" type="number" min="0" step="0.5" value="7" placeholder="雅思填 7，托福填 100">
+            </label>
+            <label class="field">
+              <span>标化 / GRE / GMAT</span>
+              <select id="testScore">
+                <option value="none">暂无</option>
+                <option value="average" selected>有，普通水平</option>
+                <option value="strong">有，较强</option>
+                <option value="excellent">有，很有竞争力</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>已有经历</span>
+            <textarea id="experience" rows="6" placeholder="例如：两段实习、一个科研项目、校内比赛、学生会、志愿活动等">有一段互联网产品实习，一个课程项目，参加过一次数据分析比赛，正在准备雅思。</textarea>
+          </label>
+
+          <div class="field-row">
+            <label class="field">
+              <span>申请时间</span>
+              <select id="timeline">
+                <option value="urgent">3 个月内提交</option>
+                <option value="normal" selected>6-9 个月内提交</option>
+                <option value="early">一年以上准备期</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>预算偏好</span>
+              <select id="budget">
+                <option value="tight">尽量控制成本</option>
+                <option value="balanced" selected>排名与成本平衡</option>
+                <option value="flexible">预算较灵活</option>
+              </select>
+            </label>
+          </div>
+
+          <section class="test-card" id="personality">
+            <div class="section-title compact">
+              <p class="eyebrow">Fit Test</p>
+              <h2>性格能力测试</h2>
+            </div>
+            <div class="quiz-grid" id="quizGrid"></div>
+          </section>
+
+          <button class="primary-button submit-button" type="submit">生成留学建议</button>
+        </form>
+
+        <aside class="result-panel" id="resultPanel">
+          <div class="empty-state" id="emptyState">
+            <p>建议报告会显示在这里。</p>
+            <span>完成左侧信息后，系统会给出定位、风险、项目策略和行动清单。</span>
+          </div>
+          <div class="report hidden" id="report">
+            <div class="report-head">
+              <div>
+                <p class="eyebrow">Strategy Report</p>
+                <h2 id="fitTitle">申请建议</h2>
+              </div>
+              <div class="fit-score">
+                <span>综合匹配度</span>
+                <strong id="fitScore">0</strong>
+              </div>
+            </div>
+            <div class="meter"><span id="scoreMeter"></span></div>
+            <div class="tag-row" id="tagRow"></div>
+            <div class="report-block">
+              <h3>选校梯度</h3>
+              <div class="school-list" id="schoolList"></div>
+            </div>
+            <div class="report-block">
+              <h3>核心判断</h3>
+              <ul id="insightList"></ul>
+            </div>
+            <div class="report-block">
+              <h3>背景补强</h3>
+              <ul id="actionList"></ul>
+            </div>
+            <div class="report-block">
+              <h3>90 天行动计划</h3>
+              <ol id="timelineList"></ol>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="sample-section" id="sample">
+        <div class="section-title">
+          <p class="eyebrow">What You Get</p>
+          <h2>这版能给出的建议</h2>
+        </div>
+        <div class="sample-grid">
+          <article>
+            <h3>学校定位</h3>
+            <p>把目标分为冲刺、匹配、保底三层，避免只盯排名导致申请组合失衡。</p>
+          </article>
+          <article>
+            <h3>经历策略</h3>
+            <p>根据专业方向判断科研、实习、竞赛、作品集或社会影响力哪一项最该补。</p>
+          </article>
+          <article>
+            <h3>个性匹配</h3>
+            <p>把领导力、研究倾向、执行力、表达力与适合的项目类型连起来。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

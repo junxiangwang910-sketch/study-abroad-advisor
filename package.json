@@ -1,0 +1,9 @@
+{
+  "name": "study-abroad-advisor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone study abroad application advisor website",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
