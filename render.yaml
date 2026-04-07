@@ -1,10 +1,6 @@
 services:
   - type: web
     name: studypath-ai
-    runtime: docker
-    healthCheckPath: /health
-    envVars:
-      - key: HOST
-        value: 0.0.0.0
-      - key: PORT
-        value: 3000
+    runtime: static
+    buildCommand: echo "No build needed"
+    staticPublishPath: .

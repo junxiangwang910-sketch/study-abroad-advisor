@@ -22,7 +22,7 @@ http://127.0.0.1:3000
 
 Render 可以识别 `render.yaml`，也可以手动填写：
 
-- Runtime: Docker
-- Dockerfile Path: `./Dockerfile`
-- Health Check Path: `/health`
-- Environment: `HOST=0.0.0.0`, `PORT=3000`
+- Service Type: Static Site
+- Runtime: Static
+- Build Command: `echo "No build needed"`
+- Publish Directory: `.`
