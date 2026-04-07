@@ -2,7 +2,7 @@ const quizItems = [
   { key: "research", text: "我愿意长期钻研一个问题，并把过程写成有结构的成果。" },
   { key: "leadership", text: "我经常主动组织同学、团队或社群完成一件事。" },
   { key: "execution", text: "我能稳定推进计划，即使任务比较琐碎也不容易拖延。" },
-  { key: "communication", text: "我擅长把自己的想法讲清楚，也愿意主动联系老师或项目方。" },
+  { key: "communication", text: "我擅长把自己的想法讲清楚，也愿意主动推进沟通和资源协调。" },
   { key: "adaptability", text: "进入陌生环境时，我能较快建立节奏并处理不确定性。" }
 ];
 
@@ -152,8 +152,8 @@ function token() {
 
 function setActivated(provider) {
   activationStatus.textContent = provider === "deepseek"
-    ? "已激活：DeepSeek 深度分析已开启。"
-    : "已激活：当前为 demo 兜底模式，配置 DeepSeek API Key 后启用真模型。";
+    ? "已激活：大模型分析已开启。"
+    : "已激活：当前为演示模式。";
 }
 
 async function activate() {
@@ -192,7 +192,7 @@ function renderReport(result) {
   insightList.innerHTML = (result.insights || []).map((item) => `<li>${text(item)}</li>`).join("");
   actionList.innerHTML = (result.improvements || []).map((item) => `<li>${text(item)}</li>`).join("");
   timelineList.innerHTML = (result.roadmap || []).map((item) => `<li>${text(item)}</li>`).join("");
-  reportNote.textContent = `${result.provider === "deepseek" ? "DeepSeek 已生成" : "Demo 模式"} · ${result.disclaimer || "本报告不代表录取承诺。"}`;
+  reportNote.textContent = `${result.provider === "deepseek" ? "大模型已生成" : "Demo 模式"} · ${result.disclaimer || "本报告不代表录取承诺。"}`;
 
   emptyState.classList.add("hidden");
   report.classList.remove("hidden");
@@ -206,7 +206,7 @@ async function submitReport(event) {
     return;
   }
 
-  submitButton.textContent = "DeepSeek 正在分析...";
+  submitButton.textContent = "正在生成报告...";
   submitButton.classList.add("loading");
   submitButton.disabled = true;
   try {
@@ -218,7 +218,7 @@ async function submitReport(event) {
   } catch (error) {
     window.alert(error.message);
   } finally {
-    submitButton.textContent = "生成 DeepSeek 留学建议";
+    submitButton.textContent = "生成留学定位报告";
     submitButton.classList.remove("loading");
     submitButton.disabled = false;
   }

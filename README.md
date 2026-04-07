@@ -1,6 +1,6 @@
-# StudyPath AI
+# 留学宝
 
-一个独立的留学申请建议网页，支持激活码访问和后端 DeepSeek 大模型分析。
+一个独立的留学申请建议网页，支持激活码访问和经过大量数据训练的大模型分析。
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/junxiangwang910-sketch/study-abroad-advisor)
 
@@ -31,8 +31,8 @@ Render 可以识别 `render.yaml`，也可以手动填写：
 
 环境变量：
 
-- `DEEPSEEK_API_KEY`: DeepSeek API Key。没填时会使用 demo 兜底报告。
-- `DEEPSEEK_MODEL`: 默认 `deepseek-chat`，也可以改成 `deepseek-reasoner`。
+- `DEEPSEEK_API_KEY`: 大模型 API Key。没填时会使用 demo 兜底报告。
+- `DEEPSEEK_MODEL`: 默认使用线上配置模型。
 - `ACTIVATION_CODES`: 逗号分隔的激活码，例如 `CODE-001,CODE-002`。
 - `SESSION_SECRET`: 用于签发激活码会话，Render 可自动生成。
 
