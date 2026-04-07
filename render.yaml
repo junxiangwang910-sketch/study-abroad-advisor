@@ -1,6 +1,21 @@
 services:
   - type: web
     name: studypath-ai
-    runtime: static
-    buildCommand: echo "No build needed"
-    staticPublishPath: .
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 3000
+      - key: DEEPSEEK_MODEL
+        value: deepseek-chat
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: ACTIVATION_CODES
+        value: STUDY-DEMO-2026
+      - key: SESSION_SECRET
+        generateValue: true

@@ -47,6 +47,18 @@
             <h2>申请背景</h2>
           </div>
 
+          <section class="activation-card" id="activationCard">
+            <div>
+              <p class="eyebrow">Access Code</p>
+              <h3>输入激活码后生成深度报告</h3>
+              <span id="activationStatus">未激活。测试码：STUDY-DEMO-2026</span>
+            </div>
+            <div class="activation-actions">
+              <input id="activationCode" type="text" placeholder="请输入激活码">
+              <button class="secondary-button dark-text" id="activateButton" type="button">激活</button>
+            </div>
+          </section>
+
           <div class="field-row">
             <label class="field">
               <span>目标国家 / 地区</span>
@@ -155,7 +167,7 @@
             <div class="quiz-grid" id="quizGrid"></div>
           </section>
 
-          <button class="primary-button submit-button" type="submit">生成留学建议</button>
+          <button class="primary-button submit-button" id="submitButton" type="submit">生成 DeepSeek 留学建议</button>
         </form>
 
         <aside class="result-panel" id="resultPanel">
@@ -192,6 +204,7 @@
               <h3>90 天行动计划</h3>
               <ol id="timelineList"></ol>
             </div>
+            <p class="report-note" id="reportNote"></p>
           </div>
         </aside>
       </section>

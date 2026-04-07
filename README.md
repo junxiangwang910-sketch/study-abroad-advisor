@@ -1,6 +1,6 @@
 # StudyPath AI
 
-一个独立的留学申请建议网页。
+一个独立的留学申请建议网页，支持激活码访问和后端 DeepSeek 大模型分析。
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/junxiangwang910-sketch/study-abroad-advisor)
 
@@ -22,7 +22,16 @@ http://127.0.0.1:3000
 
 Render 可以识别 `render.yaml`，也可以手动填写：
 
-- Service Type: Static Site
-- Runtime: Static
-- Build Command: `echo "No build needed"`
-- Publish Directory: `.`
+- Service Type: Web Service
+- Runtime: Node
+- Instance Type: Free
+- Build Command: `npm install`
+- Start Command: `npm start`
+- Health Check Path: `/health`
+
+环境变量：
+
+- `DEEPSEEK_API_KEY`: DeepSeek API Key。没填时会使用 demo 兜底报告。
+- `DEEPSEEK_MODEL`: 默认 `deepseek-chat`，也可以改成 `deepseek-reasoner`。
+- `ACTIVATION_CODES`: 逗号分隔的激活码，例如 `CODE-001,CODE-002`。
+- `SESSION_SECRET`: 用于签发激活码会话，Render 可自动生成。
