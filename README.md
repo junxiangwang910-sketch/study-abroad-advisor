@@ -2,6 +2,8 @@
 
 一个独立的留学申请建议网页。
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/junxiangwang910-sketch/study-abroad-advisor)
+
 ## 本地运行
 
 ```bash
