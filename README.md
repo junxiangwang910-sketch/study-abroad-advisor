@@ -35,3 +35,10 @@ Render 可以识别 `render.yaml`，也可以手动填写：
 - `DEEPSEEK_MODEL`: 默认 `deepseek-chat`，也可以改成 `deepseek-reasoner`。
 - `ACTIVATION_CODES`: 逗号分隔的激活码，例如 `CODE-001,CODE-002`。
 - `SESSION_SECRET`: 用于签发激活码会话，Render 可自动生成。
+
+## 商业化上线前要改
+
+- 在 `index.html` 里把 `YOUR_WECHAT_ID` 和 `your-email@example.com` 换成真实联系方式。
+- 根据你的实际价格修改“体验版 / 详细定位报告 / 人工复核”的价格。
+- 在 Render 的 `ACTIVATION_CODES` 里只保留你要出售的激活码；不要长期保留公开测试码。
+- 如果要做一次性激活码、用量统计或订单管理，需要再接数据库。

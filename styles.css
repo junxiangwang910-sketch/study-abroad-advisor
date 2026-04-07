@@ -51,6 +51,10 @@ body::before {
 .input-panel,
 .result-panel,
 .sample-grid article,
+.pricing-card,
+.notice-card,
+.proof-grid article,
+.contact-card,
 .test-card,
 .activation-card {
   border: 1px solid var(--line);
@@ -183,7 +187,8 @@ body::before {
 .hero-actions,
 .field-row,
 .report-head,
-.tag-row {
+.tag-row,
+.proof-strip {
   display: flex;
   gap: 12px;
 }
@@ -213,6 +218,20 @@ body::before {
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.34);
   background: rgba(255, 255, 255, 0.13);
+}
+
+.proof-strip {
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.proof-strip span {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: rgba(245, 252, 254, 0.9);
+  background: rgba(255, 255, 255, 0.12);
+  font-weight: 700;
 }
 
 .advisor-grid {
@@ -504,30 +523,103 @@ textarea:focus {
   line-height: 1.65;
 }
 
-.sample-section {
+.pricing-section,
+.sample-section,
+.proof-section,
+.contact-section {
   margin-top: 58px;
 }
 
-.sample-grid {
+.pricing-grid,
+.sample-grid,
+.proof-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
-.sample-grid article {
-  border-radius: 8px;
-  padding: 22px;
+.pricing-grid,
+.sample-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.sample-grid p {
+.proof-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sample-grid article,
+.pricing-card,
+.notice-card,
+.proof-grid article,
+.contact-card,
+.report-preview {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.pricing-card {
+  display: grid;
+  gap: 12px;
+}
+
+.pricing-card.featured {
+  border-color: rgba(15, 111, 125, 0.44);
+  background: rgba(235, 250, 252, 0.9);
+}
+
+.plan-label {
+  width: fit-content;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: white;
+  font-weight: 800;
+  background: var(--brand);
+}
+
+.pricing-card h3,
+.proof-grid h3,
+.contact-card h3,
+.report-preview h3 {
+  margin: 0;
+}
+
+.pricing-card strong {
+  color: var(--brand-dark);
+  font-size: 1.8rem;
+}
+
+.notice-card,
+.report-preview,
+.contact-card {
+  margin-top: 16px;
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.sample-grid p,
+.pricing-card p,
+.notice-card p,
+.proof-grid p,
+.contact-card p,
+.report-preview p {
   margin: 0;
   line-height: 1.75;
+  color: var(--muted);
 }
 
 @media (max-width: 980px) {
   .topbar,
   .advisor-grid,
-  .sample-grid {
+  .pricing-grid,
+  .sample-grid,
+  .proof-grid,
+  .contact-card {
     grid-template-columns: 1fr;
   }
 
@@ -542,7 +634,10 @@ textarea:focus {
   }
 
   .advisor-grid,
-  .sample-grid {
+  .pricing-grid,
+  .sample-grid,
+  .proof-grid,
+  .contact-card {
     display: grid;
   }
 
