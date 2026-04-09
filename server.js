@@ -90,11 +90,46 @@ function seedKnowledgeSnippets(db) {
       tags: ["选校", "梯度", "预算", "匹配"]
     },
     {
+      id: "study-fit-over-ranking",
+      scenario: "general",
+      title: "匹配度优先于单纯排名",
+      content: "公开申请案例里，真正提高成功率的往往不是盲冲更高排名，而是把课程内容、教授方向、项目资源和自己的经历证据对上。排名可以决定上限，匹配度决定说服力。",
+      tags: ["匹配度", "排名", "课程", "项目资源"]
+    },
+    {
+      id: "study-specific-story",
+      scenario: "general",
+      title: "经历要能落到具体证据",
+      content: "高质量申请文书和案例总结的共同点，是把经历写成可验证的证据链：做过什么、怎么做、结果如何、为什么导向这个专业，而不是只说热爱或兴趣浓厚。",
+      tags: ["文书", "经历", "证据链", "故事线"]
+    },
+    {
+      id: "study-recommendation-quality",
+      scenario: "general",
+      title: "推荐信看熟悉度不是头衔",
+      content: "公开招生建议里反复强调，推荐人最重要的是了解你的学术能力或专业表现，能写出细节和判断，而不是只有名气。材料包越完整，推荐信越容易写得强。",
+      tags: ["推荐信", "熟悉度", "材料包", "细节"]
+    },
+    {
+      id: "study-timeline-packing",
+      scenario: "general",
+      title: "申请材料要按时间线打包",
+      content: "很多失败案例不是背景差，而是节奏乱：选校太晚、推荐信没提前准备、文书版本混乱、截止日期前集中堆任务。申请路径要提前拆成月度动作，而不是最后两周硬赶。",
+      tags: ["时间线", "截止日期", "推荐信", "文书版本"]
+    },
+    {
       id: "study-low-gpa",
       scenario: "low-gpa",
       title: "低 GPA 申请思路",
       content: "GPA 不占优势时，重点不是硬冲头部项目，而是补课程项目、量化成果、解释材料和更稳的保底组合，避免申请结构失衡。",
       tags: ["GPA", "低分", "保底", "项目"]
+    },
+    {
+      id: "study-low-gpa-trend",
+      scenario: "low-gpa",
+      title: "低 GPA 更要讲清趋势",
+      content: "如果早期成绩拖后腿，但后期明显回升，可以把趋势、难课表现、量化课程和补强项目放在一起讲清楚。招生方更容易接受“有成长轨迹”的申请人，而不是没有解释的低分。",
+      tags: ["GPA", "趋势", "难课", "解释"]
     },
     {
       id: "study-transfer-major",
@@ -104,11 +139,53 @@ function seedKnowledgeSnippets(db) {
       tags: ["转专业", "先修课", "项目", "文书"]
     },
     {
+      id: "study-transfer-proof",
+      scenario: "transfer",
+      title: "转专业最怕动机和证据脱节",
+      content: "公开成功案例里，转专业申请通常会形成闭环：原专业带来的能力基础、具体桥梁课程或项目、新方向想解决的问题、未来路径。只讲热情不讲准备，会显得跳跃。",
+      tags: ["转专业", "桥梁经历", "动机", "闭环"]
+    },
+    {
       id: "study-budget",
       scenario: "budget",
       title: "预算有限策略",
       content: "预算有限时，要把申请费、学费和生活成本一起算，不要把时间和预算过度压在高风险冲刺项目上。",
       tags: ["预算", "成本", "冲刺", "保底"]
+    },
+    {
+      id: "study-budget-roi",
+      scenario: "budget",
+      title: "预算有限更要看投入产出",
+      content: "预算有限时，公开经验里最常见的后悔点是只盯名校名气，忽略总成本、奖学金概率、实习资源和毕业去向。申请结构应该优先保证可落地，再谈更高排名。",
+      tags: ["预算", "奖学金", "就业", "投入产出"]
+    },
+    {
+      id: "study-undergrad-subject-commitment",
+      scenario: "undergrad",
+      title: "本科申请更看学科承诺和长期性",
+      content: "本科申请里，活动数量不是核心，长期投入、学科相关性和成长轨迹更重要。公开指导反复强调，招生方更容易被稳定的兴趣路径和真实反思打动，而不是堆砌很多零散活动。",
+      tags: ["本科", "活动", "长期投入", "学科承诺"]
+    },
+    {
+      id: "study-undergrad-balance",
+      scenario: "undergrad",
+      title: "本科选校要同时看课程与支持体系",
+      content: "本科申请不能只看学校名气，还要看课程结构、国际生支持、生活成本、奖助学金和升学出口。对家庭决策来说，这些因素经常比单一排名更影响最终体验。",
+      tags: ["本科", "课程结构", "支持体系", "奖学金"]
+    },
+    {
+      id: "study-phd-fit",
+      scenario: "phd",
+      title: "博士申请核心是研究契合",
+      content: "博士申请更像双向匹配。公开招生标准通常会看研究兴趣是否对口、是否有合适导师、研究计划是否具体、学术训练是否扎实。博士不能按硕士逻辑只看学校层级。",
+      tags: ["博士", "导师", "研究计划", "匹配"]
+    },
+    {
+      id: "study-phd-proof",
+      scenario: "phd",
+      title: "博士材料要证明研究能力",
+      content: "博士材料里最能打动人的通常不是泛泛而谈的理想，而是研究问题、方法、写作样本、论文或项目经历，以及推荐人对研究潜力的明确判断。",
+      tags: ["博士", "研究能力", "写作样本", "推荐信"]
     }
   ];
   const stmt = db.prepare("INSERT OR IGNORE INTO knowledge_snippets (id, scenario, title, content, tags_json) VALUES (?, ?, ?, ?, ?)");
@@ -248,20 +325,26 @@ function getStudyProfileSummary(token) {
   return JSON.parse(row.summary_json);
 }
 
-function detectScenario(profile) {
+function collectScenarios(profile) {
+  const scenarios = new Set(["general"]);
   const gpa = Number(profile.gpa || 0);
-  if (gpa > 0 && gpa < 84) return "low-gpa";
-  if (/转|跨专业/.test(`${profile.experience || ""}${profile.major || ""}`)) return "transfer";
-  if (/控制成本|预算/.test(profile.budget || "")) return "budget";
-  return "general";
+  const stageText = `${profile.stage || ""}${profile.educationStage || ""}`;
+  if (gpa > 0 && gpa < 84) scenarios.add("low-gpa");
+  if (/转|跨专业/.test(`${profile.experience || ""}${profile.major || ""}`)) scenarios.add("transfer");
+  if (/控制成本|预算|奖学金|性价比/.test(profile.budget || "")) scenarios.add("budget");
+  if (/本科/.test(stageText)) scenarios.add("undergrad");
+  if (/博士|phd|doctoral/i.test(stageText)) scenarios.add("phd");
+  return Array.from(scenarios);
 }
 
 function getKnowledgeSnippets(profile) {
-  const scenario = detectScenario(profile);
-  return db.prepare("SELECT * FROM knowledge_snippets WHERE scenario IN (?, 'general')").all(scenario).map((row) => ({
+  const scenarios = collectScenarios(profile);
+  const placeholders = scenarios.map(() => "?").join(", ");
+  return db.prepare(`SELECT * FROM knowledge_snippets WHERE scenario IN (${placeholders})`).all(...scenarios).map((row) => ({
     title: row.title,
-    content: row.content
-  })).slice(0, 3);
+    content: row.content,
+    tags: JSON.parse(row.tags_json)
+  })).slice(0, 6);
 }
 
 function fallbackAnalysis(profile, userProfile) {
@@ -301,13 +384,17 @@ function fallbackAnalysis(profile, userProfile) {
 function buildPrompt(profile, userProfile, snippets) {
   return `
 请你担任资深留学申请顾问，基于用户资料生成严肃、具体、可执行的中文申请分析。
+你可以参考两类信息：
+1. 用户自己的历史档案；
+2. 内部知识片段：这些不是照抄原文，而是从公开招生建议、公开申请经验、公开案例总结中蒸馏出的稳定规律。
 
 要求：
 1. 不要承诺录取概率，不要编造具体学校录取数据。
 2. 必须结合目标地区、学校档次、GPA/语言/标化、经历、时间线、预算和性格能力测试。
 3. 如果有历史档案，请延续用户长期短板，不要把每次报告当第一次。
-4. 只输出 JSON，不要 Markdown，不要代码块。
-5. JSON 字段必须是：
+4. 如果内部知识片段里出现了明显相关的经验模式，要把它转成对这个用户有用的判断，而不是原样复述。
+5. 只输出 JSON，不要 Markdown，不要代码块。
+6. JSON 字段必须是：
 {
   "title": "一句话结论",
   "fitScore": 0-100整数,

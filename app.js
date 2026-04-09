@@ -214,7 +214,7 @@ function renderReport(result) {
   insightList.innerHTML = (result.insights || []).map((item) => `<li>${text(item)}</li>`).join("");
   actionList.innerHTML = (result.improvements || []).map((item) => `<li>${text(item)}</li>`).join("");
   timelineList.innerHTML = (result.roadmap || []).map((item) => `<li>${text(item)}</li>`).join("");
-  reportNote.textContent = `${result.provider === "deepseek" ? "大模型已生成" : "Demo 模式"} · ${result.disclaimer || "本报告不代表录取承诺。"}`;
+  reportNote.textContent = `${result.provider === "deepseek" ? "大模型已生成" : "Demo 模式"} · 已结合公开申请经验模式库 · ${result.disclaimer || "本报告不代表录取承诺。"}`;
   renderProfile(result.profile);
 
   emptyState.classList.add("hidden");
