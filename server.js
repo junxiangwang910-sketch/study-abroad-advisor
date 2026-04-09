@@ -2,8 +2,11 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const { DatabaseSync } = require("node:sqlite");
 
 const ROOT = __dirname;
+const DATA_DIR = path.join(ROOT, "data");
+const DB_PATH = path.join(DATA_DIR, "study-data.sqlite");
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = Number(process.env.PORT || 3000);
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || "";
@@ -18,12 +21,101 @@ const mimeTypes = {
   ".json": "application/json; charset=utf-8"
 };
 
+function ensureDataDir() {
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
 function parseActivationCodes(raw) {
   return String(raw)
     .split(",")
     .map((code) => code.trim().toUpperCase())
     .filter(Boolean);
 }
+
+function openDatabase() {
+  ensureDataDir();
+  const db = new DatabaseSync(DB_PATH);
+  db.exec(`
+    PRAGMA journal_mode = WAL;
+    CREATE TABLE IF NOT EXISTS activation_codes (
+      code TEXT PRIMARY KEY,
+      created_at TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS study_users (
+      token TEXT PRIMARY KEY,
+      code_hash TEXT NOT NULL,
+      provider TEXT NOT NULL,
+      created_at TEXT NOT NULL,
+      last_active_at TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS study_reports (
+      id TEXT PRIMARY KEY,
+      token TEXT NOT NULL,
+      timestamp TEXT NOT NULL,
+      profile_json TEXT NOT NULL,
+      report_json TEXT NOT NULL,
+      FOREIGN KEY(token) REFERENCES study_users(token) ON DELETE CASCADE
+    );
+    CREATE TABLE IF NOT EXISTS study_profiles (
+      token TEXT PRIMARY KEY,
+      summary_json TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      FOREIGN KEY(token) REFERENCES study_users(token) ON DELETE CASCADE
+    );
+    CREATE TABLE IF NOT EXISTS knowledge_snippets (
+      id TEXT PRIMARY KEY,
+      scenario TEXT NOT NULL,
+      title TEXT NOT NULL,
+      content TEXT NOT NULL,
+      tags_json TEXT NOT NULL DEFAULT '[]'
+    );
+  `);
+  seedActivationCodes(db);
+  seedKnowledgeSnippets(db);
+  return db;
+}
+
+function seedActivationCodes(db) {
+  const stmt = db.prepare("INSERT OR IGNORE INTO activation_codes (code, created_at) VALUES (?, ?)");
+  ACTIVATION_CODES.forEach((code) => stmt.run(code, new Date().toISOString()));
+}
+
+function seedKnowledgeSnippets(db) {
+  const snippets = [
+    {
+      id: "study-tier-balance",
+      scenario: "general",
+      title: "选校梯度原则",
+      content: "选校不要只看排名，要把课程匹配、先修要求、预算、地区就业资源和截止日期一起放进组合里，保持冲刺、匹配、保底平衡。",
+      tags: ["选校", "梯度", "预算", "匹配"]
+    },
+    {
+      id: "study-low-gpa",
+      scenario: "low-gpa",
+      title: "低 GPA 申请思路",
+      content: "GPA 不占优势时，重点不是硬冲头部项目，而是补课程项目、量化成果、解释材料和更稳的保底组合，避免申请结构失衡。",
+      tags: ["GPA", "低分", "保底", "项目"]
+    },
+    {
+      id: "study-transfer-major",
+      scenario: "transfer",
+      title: "转专业申请",
+      content: "转专业更看先修课、桥梁经历、项目证据和文书主线，不能只说感兴趣，要证明自己已经具备转向目标领域的基础。",
+      tags: ["转专业", "先修课", "项目", "文书"]
+    },
+    {
+      id: "study-budget",
+      scenario: "budget",
+      title: "预算有限策略",
+      content: "预算有限时，要把申请费、学费和生活成本一起算，不要把时间和预算过度压在高风险冲刺项目上。",
+      tags: ["预算", "成本", "冲刺", "保底"]
+    }
+  ];
+  const stmt = db.prepare("INSERT OR IGNORE INTO knowledge_snippets (id, scenario, title, content, tags_json) VALUES (?, ?, ?, ?, ?)");
+  snippets.forEach((item) => stmt.run(item.id, item.scenario, item.title, item.content, JSON.stringify(item.tags)));
+}
+
+const db = openDatabase();
 
 function json(res, statusCode, payload) {
   res.writeHead(statusCode, { "Content-Type": "application/json; charset=utf-8" });
@@ -41,10 +133,7 @@ function parseBody(req) {
       }
     });
     req.on("end", () => {
-      if (!data) {
-        resolve({});
-        return;
-      }
+      if (!data) return resolve({});
       try {
         resolve(JSON.parse(data));
       } catch (_error) {
@@ -55,53 +144,135 @@ function parseBody(req) {
 }
 
 function signActivationCode(code) {
-  return crypto
-    .createHmac("sha256", SESSION_SECRET)
-    .update(String(code || "").trim().toUpperCase())
-    .digest("hex");
+  return crypto.createHmac("sha256", SESSION_SECRET).update(String(code || "").trim().toUpperCase()).digest("hex");
+}
+
+function hashCode(code) {
+  return crypto.createHash("sha256").update(String(code || "").trim().toUpperCase()).digest("hex");
+}
+
+function ensureStudyUserByCode(code) {
+  const normalized = String(code || "").trim().toUpperCase();
+  const row = db.prepare("SELECT code FROM activation_codes WHERE code = ?").get(normalized);
+  if (!row) throw new Error("激活码无效，请检查后重试。");
+
+  const token = signActivationCode(normalized);
+  const existing = db.prepare("SELECT * FROM study_users WHERE token = ?").get(token);
+  const now = new Date().toISOString();
+  if (existing) {
+    db.prepare("UPDATE study_users SET last_active_at = ? WHERE token = ?").run(now, token);
+    return { token, provider: DEEPSEEK_API_KEY ? "deepseek" : "demo" };
+  }
+
+  db.prepare(`
+    INSERT INTO study_users (token, code_hash, provider, created_at, last_active_at)
+    VALUES (?, ?, ?, ?, ?)
+  `).run(token, hashCode(normalized), DEEPSEEK_API_KEY ? "deepseek" : "demo", now, now);
+  return { token, provider: DEEPSEEK_API_KEY ? "deepseek" : "demo" };
 }
 
 function verifyActivationToken(token) {
-  const cleanToken = String(token || "");
-  return ACTIVATION_CODES.some((code) => {
-    const signed = signActivationCode(code);
-    return cleanToken.length === signed.length && crypto.timingSafeEqual(Buffer.from(cleanToken), Buffer.from(signed));
-  });
+  if (!token) return false;
+  return Boolean(db.prepare("SELECT token FROM study_users WHERE token = ?").get(String(token)));
 }
 
-function serveStatic(req, res) {
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  let filePath = url.pathname === "/" ? path.join(ROOT, "index.html") : path.join(ROOT, url.pathname);
-
-  if (!filePath.startsWith(ROOT)) {
-    json(res, 403, { error: "Forbidden" });
-    return;
-  }
-
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-    filePath = path.join(filePath, "index.html");
-  }
-
-  fs.readFile(filePath, (error, data) => {
-    if (error) {
-      json(res, 404, { error: "Not found" });
-      return;
-    }
-
-    res.writeHead(200, { "Content-Type": mimeTypes[path.extname(filePath)] || "text/plain; charset=utf-8" });
-    res.end(data);
-  });
+function touchUser(token) {
+  db.prepare("UPDATE study_users SET last_active_at = ? WHERE token = ?").run(new Date().toISOString(), token);
 }
 
-function fallbackAnalysis(profile) {
+function getStudyHistory(token) {
+  return db.prepare("SELECT * FROM study_reports WHERE token = ? ORDER BY timestamp DESC").all(token).map((row) => ({
+    id: row.id,
+    timestamp: row.timestamp,
+    profile: JSON.parse(row.profile_json),
+    report: JSON.parse(row.report_json)
+  }));
+}
+
+function saveStudyReport(token, profile, report) {
+  db.prepare(`
+    INSERT INTO study_reports (id, token, timestamp, profile_json, report_json)
+    VALUES (?, ?, ?, ?, ?)
+  `).run(crypto.randomUUID(), token, new Date().toLocaleString(), JSON.stringify(profile), JSON.stringify(report));
+}
+
+function rankTags(items = [], limit = 6) {
+  const counts = new Map();
+  items.flat().filter(Boolean).forEach((item) => {
+    const key = String(item).trim();
+    if (!key) return;
+    counts.set(key, (counts.get(key) || 0) + 1);
+  });
+  return Array.from(counts.entries())
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh-CN"))
+    .slice(0, limit)
+    .map(([label]) => label);
+}
+
+function buildStudyProfileSummary(token) {
+  const history = getStudyHistory(token);
+  if (!history.length) {
+    return {
+      totalReports: 0,
+      favoriteTargets: [],
+      recurringRisks: [],
+      focusTags: [],
+      nextActions: ["先完成 1 次定位报告，再开始建立个人申请档案。"]
+    };
+  }
+  const recent = history.slice(0, 6);
+  const reports = recent.map((item) => item.report);
+  const profiles = recent.map((item) => item.profile);
+  return {
+    totalReports: history.length,
+    favoriteTargets: rankTags(profiles.map((item) => [item.destination, item.major]), 4),
+    recurringRisks: rankTags(reports.map((item) => item.improvements || []), 5),
+    focusTags: rankTags([
+      ...reports.map((item) => item.tags || []),
+      ...reports.map((item) => item.improvements || [])
+    ], 6),
+    nextActions: reports[0]?.roadmap?.slice(0, 3) || ["先补充目标地区、专业和核心经历。"]
+  };
+}
+
+function saveStudyProfileSummary(token, summary) {
+  db.prepare(`
+    INSERT OR REPLACE INTO study_profiles (token, summary_json, updated_at)
+    VALUES (?, ?, ?)
+  `).run(token, JSON.stringify(summary), new Date().toISOString());
+}
+
+function getStudyProfileSummary(token) {
+  const row = db.prepare("SELECT * FROM study_profiles WHERE token = ?").get(token);
+  if (!row) return buildStudyProfileSummary(token);
+  return JSON.parse(row.summary_json);
+}
+
+function detectScenario(profile) {
+  const gpa = Number(profile.gpa || 0);
+  if (gpa > 0 && gpa < 84) return "low-gpa";
+  if (/转|跨专业/.test(`${profile.experience || ""}${profile.major || ""}`)) return "transfer";
+  if (/控制成本|预算/.test(profile.budget || "")) return "budget";
+  return "general";
+}
+
+function getKnowledgeSnippets(profile) {
+  const scenario = detectScenario(profile);
+  return db.prepare("SELECT * FROM knowledge_snippets WHERE scenario IN (?, 'general')").all(scenario).map((row) => ({
+    title: row.title,
+    content: row.content
+  })).slice(0, 3);
+}
+
+function fallbackAnalysis(profile, userProfile) {
   const target = profile.schoolTier || "高竞争项目";
   const gpa = Number(profile.gpa || 0);
-  const fitScore = Math.max(35, Math.min(90, Math.round((gpa > 4.3 ? gpa : gpa * 23) - (target.includes("顶尖") ? 10 : 0))));
+  const fitScore = Math.max(35, Math.min(90, Math.round((gpa > 4.3 ? gpa : gpa * 0.85) + (target.includes("稳健") ? 10 : 0) + (target.includes("顶尖") ? -8 : 0))));
   return {
     provider: "demo",
-    title: fitScore >= 78 ? "背景具备竞争力，但需要更强叙事" : "需要降低申请风险并补强核心证据",
+    title: fitScore >= 78 ? "背景具备竞争力，但申请结构还需要更稳" : "当前更适合先纠偏，再决定冲刺范围",
     fitScore,
-    tags: ["Demo 分析", target, profile.major || "专业待定", profile.destination || "地区待定"],
+    tags: ["自动档案版", target, profile.major || "专业待定", profile.destination || "地区待定"],
     schoolStrategy: [
       { tier: "冲刺", advice: "保留 2-3 个理想项目，但不要把预算和时间全部压在冲刺档。" },
       { tier: "匹配", advice: "选择 5-7 个课程匹配、先修要求明确、就业资源稳定的项目作为主战场。" },
@@ -109,8 +280,8 @@ function fallbackAnalysis(profile) {
     ],
     insights: [
       "当前报告为兜底分析：服务器尚未配置 DEEPSEEK_API_KEY，配置后会生成更细的个性化报告。",
-      "选校不能只看排名，必须把专业先修课、经历证据、文书主线和推荐信强度一起判断。",
-      "如果目标是高竞争项目，需要把经历写成可验证成果，而不是简单罗列实习和比赛名称。"
+      userProfile?.recurringRisks?.length ? `你最近几次最常出现的风险点是：${userProfile.recurringRisks.slice(0, 2).join("、")}。` : "第一次使用建议先把目标国家、项目层级和核心经历梳理清楚。",
+      "选校不能只看排名，必须把专业先修课、经历证据、文书主线和推荐信强度一起判断。"
     ],
     improvements: [
       "把经历整理成 3 条主线：学术能力、专业实践、长期动机。",
@@ -127,15 +298,16 @@ function fallbackAnalysis(profile) {
   };
 }
 
-function buildPrompt(profile) {
+function buildPrompt(profile, userProfile, snippets) {
   return `
 请你担任资深留学申请顾问，基于用户资料生成严肃、具体、可执行的中文申请分析。
 
 要求：
 1. 不要承诺录取概率，不要编造具体学校录取数据。
 2. 必须结合目标地区、学校档次、GPA/语言/标化、经历、时间线、预算和性格能力测试。
-3. 输出 JSON，不要 Markdown，不要代码块。
-4. JSON 字段必须是：
+3. 如果有历史档案，请延续用户长期短板，不要把每次报告当第一次。
+4. 只输出 JSON，不要 Markdown，不要代码块。
+5. JSON 字段必须是：
 {
   "title": "一句话结论",
   "fitScore": 0-100整数,
@@ -147,8 +319,14 @@ function buildPrompt(profile) {
   "disclaimer": "录取不保证说明"
 }
 
-用户资料：
+用户当前资料：
 ${JSON.stringify(profile, null, 2)}
+
+历史档案：
+${JSON.stringify(userProfile || {}, null, 2)}
+
+内部知识片段：
+${JSON.stringify(snippets || [], null, 2)}
 `;
 }
 
@@ -166,8 +344,9 @@ function safeParseModelJson(text) {
   }
 }
 
-async function callDeepSeek(profile) {
-  if (!DEEPSEEK_API_KEY) return fallbackAnalysis(profile);
+async function callDeepSeek(profile, userProfile) {
+  const snippets = getKnowledgeSnippets(profile);
+  if (!DEEPSEEK_API_KEY) return fallbackAnalysis(profile, userProfile);
 
   const response = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
@@ -178,57 +357,89 @@ async function callDeepSeek(profile) {
     body: JSON.stringify({
       model: DEEPSEEK_MODEL,
       messages: [
-        {
-          role: "system",
-          content: "你是严谨的留学申请策略顾问，只输出符合要求的 JSON。"
-        },
-        {
-          role: "user",
-          content: buildPrompt(profile)
-        }
+        { role: "system", content: "你是严谨的留学申请策略顾问，只输出符合要求的 JSON。" },
+        { role: "user", content: buildPrompt(profile, userProfile, snippets) }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.4,
+      temperature: 0.35,
       stream: false
     })
   });
 
   const payload = await response.json();
-  if (!response.ok) {
-    throw new Error(payload?.error?.message || "DeepSeek 请求失败");
-  }
-
+  if (!response.ok) throw new Error(payload?.error?.message || "DeepSeek 请求失败");
   const outputText = payload.choices?.[0]?.message?.content || "";
   return { provider: "deepseek", ...safeParseModelJson(outputText) };
+}
+
+function serveStatic(req, res) {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  let filePath = url.pathname === "/" ? path.join(ROOT, "index.html") : path.join(ROOT, url.pathname);
+  if (!filePath.startsWith(ROOT)) return json(res, 403, { error: "Forbidden" });
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) filePath = path.join(filePath, "index.html");
+  fs.readFile(filePath, (error, data) => {
+    if (error) return json(res, 404, { error: "Not found" });
+    res.writeHead(200, { "Content-Type": mimeTypes[path.extname(filePath)] || "text/plain; charset=utf-8" });
+    res.end(data);
+  });
 }
 
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${req.headers.host}`);
+
     if (req.method === "GET" && url.pathname === "/health") {
-      json(res, 200, { ok: true, provider: DEEPSEEK_API_KEY ? "deepseek" : "demo" });
+      json(res, 200, { ok: true, provider: DEEPSEEK_API_KEY ? "deepseek" : "demo", storage: "sqlite" });
       return;
     }
 
     if (req.method === "POST" && url.pathname === "/api/activate") {
       const body = await parseBody(req);
-      const code = String(body.code || "").trim().toUpperCase();
-      if (!ACTIVATION_CODES.includes(code)) {
-        json(res, 403, { error: "激活码无效，请检查后重试。" });
+      const session = ensureStudyUserByCode(body.code);
+      json(res, 200, session);
+      return;
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/bootstrap") {
+      const token = String(url.searchParams.get("token") || "");
+      if (!verifyActivationToken(token)) {
+        json(res, 200, { activated: false });
         return;
       }
-      json(res, 200, { token: signActivationCode(code), provider: DEEPSEEK_API_KEY ? "deepseek" : "demo" });
+      touchUser(token);
+      json(res, 200, {
+        activated: true,
+        provider: DEEPSEEK_API_KEY ? "deepseek" : "demo",
+        profile: getStudyProfileSummary(token),
+        history: getStudyHistory(token).slice(0, 5)
+      });
+      return;
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/history") {
+      const token = String(url.searchParams.get("token") || "");
+      if (!verifyActivationToken(token)) {
+        json(res, 403, { error: "请先输入有效激活码。" });
+        return;
+      }
+      json(res, 200, { history: getStudyHistory(token) });
       return;
     }
 
     if (req.method === "POST" && url.pathname === "/api/analyze") {
       const body = await parseBody(req);
-      if (!verifyActivationToken(body.token)) {
+      const userToken = String(body.token || "");
+      if (!verifyActivationToken(userToken)) {
         json(res, 403, { error: "请先输入有效激活码。" });
         return;
       }
-      const result = await callDeepSeek(body.profile || {});
-      json(res, 200, result);
+      touchUser(userToken);
+      const userProfile = getStudyProfileSummary(userToken);
+      const result = await callDeepSeek(body.profile || {}, userProfile);
+      saveStudyReport(userToken, body.profile || {}, result);
+      const nextProfile = buildStudyProfileSummary(userToken);
+      saveStudyProfileSummary(userToken, nextProfile);
+      json(res, 200, { ...result, profile: nextProfile, history: getStudyHistory(userToken).slice(0, 5) });
       return;
     }
 
@@ -239,6 +450,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`StudyPath AI running at http://${HOST}:${PORT}`);
+  console.log(`Liuxuebao running at http://${HOST}:${PORT}`);
   console.log(`Provider: ${DEEPSEEK_API_KEY ? `DeepSeek (${DEEPSEEK_MODEL})` : "demo fallback"}`);
+  console.log(`Storage: SQLite at ${DB_PATH}`);
 });

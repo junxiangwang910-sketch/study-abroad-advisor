@@ -23,6 +23,10 @@ const activationCode = document.querySelector("#activationCode");
 const activateButton = document.querySelector("#activateButton");
 const activationStatus = document.querySelector("#activationStatus");
 const submitButton = document.querySelector("#submitButton");
+const profileTotalReports = document.querySelector("#profileTotalReports");
+const profileFavoriteTargets = document.querySelector("#profileFavoriteTargets");
+const profileFocusTags = document.querySelector("#profileFocusTags");
+const profileNextActions = document.querySelector("#profileNextActions");
 
 const optionLabels = {
   destination: {
@@ -156,6 +160,23 @@ function setActivated(provider) {
     : "已激活：当前为演示模式。";
 }
 
+function renderProfile(profile) {
+  if (!profile) return;
+  profileTotalReports.textContent = String(profile.totalReports || 0);
+  profileFavoriteTargets.textContent = (profile.favoriteTargets || []).slice(0, 2).join(" / ") || "暂无";
+  profileFocusTags.innerHTML = (profile.focusTags || []).map((tag) => `<span class="tag">${text(tag)}</span>`).join("");
+  profileNextActions.innerHTML = (profile.nextActions || []).map((item) => `<li>${text(item)}</li>`).join("");
+}
+
+async function bootstrap() {
+  if (!token()) return;
+  const response = await fetch(`/api/bootstrap?token=${encodeURIComponent(token())}`);
+  const payload = await response.json();
+  if (!payload.activated) return;
+  setActivated(payload.provider || window.localStorage.getItem("studypath-provider") || "demo");
+  renderProfile(payload.profile);
+}
+
 async function activate() {
   const code = activationCode.value.trim();
   if (!code) {
@@ -169,6 +190,7 @@ async function activate() {
     window.localStorage.setItem("studypath-token", payload.token);
     window.localStorage.setItem("studypath-provider", payload.provider);
     setActivated(payload.provider);
+    bootstrap().catch(console.error);
   } catch (error) {
     window.alert(error.message);
   } finally {
@@ -193,6 +215,7 @@ function renderReport(result) {
   actionList.innerHTML = (result.improvements || []).map((item) => `<li>${text(item)}</li>`).join("");
   timelineList.innerHTML = (result.roadmap || []).map((item) => `<li>${text(item)}</li>`).join("");
   reportNote.textContent = `${result.provider === "deepseek" ? "大模型已生成" : "Demo 模式"} · ${result.disclaimer || "本报告不代表录取承诺。"}`;
+  renderProfile(result.profile);
 
   emptyState.classList.add("hidden");
   report.classList.remove("hidden");
@@ -228,5 +251,6 @@ renderQuiz();
 if (token()) {
   setActivated(window.localStorage.getItem("studypath-provider") || "demo");
 }
+bootstrap().catch(console.error);
 activateButton.addEventListener("click", activate);
 form.addEventListener("submit", submitReport);
