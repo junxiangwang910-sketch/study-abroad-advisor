@@ -118,6 +118,20 @@ function seedKnowledgeSnippets(db) {
       tags: ["时间线", "截止日期", "推荐信", "文书版本"]
     },
     {
+      id: "study-late-cycle",
+      scenario: "late-timeline",
+      title: "时间线偏晚时要先保交付",
+      content: "如果离提交只剩几个月，策略重点要从“广撒网”切换成“先把能交稳的项目准备完整”。公开申请经验里，后期最容易失分的是材料质量失控，而不是学校选得不够多。",
+      tags: ["时间线", "晚申", "交付", "材料质量"]
+    },
+    {
+      id: "study-early-cycle",
+      scenario: "early-timeline",
+      title: "时间线充足时要先建素材库",
+      content: "如果还有 9 到 12 个月以上准备期，最值得先做的不是急着定终版文书，而是先建立项目清单、经历素材库、推荐信素材包和考试节奏，这样后面更容易拉开申请质量。",
+      tags: ["时间线", "早准备", "素材库", "考试节奏"]
+    },
+    {
       id: "study-low-gpa",
       scenario: "low-gpa",
       title: "低 GPA 申请思路",
@@ -160,6 +174,41 @@ function seedKnowledgeSnippets(db) {
       tags: ["预算", "奖学金", "就业", "投入产出"]
     },
     {
+      id: "study-us-research-fit",
+      scenario: "us",
+      title: "美国申请更强调研究与职业路径说明",
+      content: "美国硕博申请的公开招生建议里，常见要求是把研究兴趣、过往训练、项目/实习成果和未来路径连起来。只写学校有多好，通常不如讲清楚你为什么和这个项目匹配。",
+      tags: ["美国", "研究兴趣", "职业路径", "匹配"]
+    },
+    {
+      id: "study-us-recommendation",
+      scenario: "us",
+      title: "美国项目更看推荐信可比性",
+      content: "公开推荐信要求里常出现对申请人在同类群体中的位置判断，所以推荐人除了熟悉你，还要能比较你的能力层级。申请人越早准备材料包，推荐信越容易写出含金量。",
+      tags: ["美国", "推荐信", "比较", "材料包"]
+    },
+    {
+      id: "study-uk-course-structure",
+      scenario: "uk",
+      title: "英国申请更适合先看课程结构",
+      content: "英国项目数量多、项目差异细，公开官方建议普遍强调先看课程设置、模块、是否有 placement、学费和录取要求，再决定是否申请。只看学校名气很容易选错项目。",
+      tags: ["英国", "课程结构", "modules", "placement"]
+    },
+    {
+      id: "study-uk-apply-early",
+      scenario: "uk",
+      title: "英国硕士很多项目适合尽早申请",
+      content: "公开英国申请指南常建议尽早递交，尤其是滚动录取或热门项目。时间拖太晚，可能不是背景不行，而是名额、奖学金和宿舍资源都变得不友好。",
+      tags: ["英国", "尽早申请", "滚动录取", "奖学金"]
+    },
+    {
+      id: "study-hk-sg-balance",
+      scenario: "hk-sg",
+      title: "港新申请要兼顾排名与落地性",
+      content: "港新项目普遍节奏快、申请集中，公开经验里常见误区是只盯最热门项目，忽略课程匹配、量化要求和整体梯度。更稳的做法是把热门项目和更适合自己背景的项目同时放进组合。",
+      tags: ["港新", "梯度", "量化", "热门项目"]
+    },
+    {
       id: "study-undergrad-subject-commitment",
       scenario: "undergrad",
       title: "本科申请更看学科承诺和长期性",
@@ -174,6 +223,13 @@ function seedKnowledgeSnippets(db) {
       tags: ["本科", "课程结构", "支持体系", "奖学金"]
     },
     {
+      id: "study-undergrad-activities",
+      scenario: "undergrad",
+      title: "本科活动要围绕主题收束",
+      content: "公开本科申请指导反复提醒，活动不必面面俱到，更重要的是围绕一个主题形成连续性：学科兴趣、领导力、服务、创作或竞赛，只要能解释成长脉络，就比堆数量更有说服力。",
+      tags: ["本科", "活动", "主题", "连续性"]
+    },
+    {
       id: "study-phd-fit",
       scenario: "phd",
       title: "博士申请核心是研究契合",
@@ -186,6 +242,13 @@ function seedKnowledgeSnippets(db) {
       title: "博士材料要证明研究能力",
       content: "博士材料里最能打动人的通常不是泛泛而谈的理想，而是研究问题、方法、写作样本、论文或项目经历，以及推荐人对研究潜力的明确判断。",
       tags: ["博士", "研究能力", "写作样本", "推荐信"]
+    },
+    {
+      id: "study-phd-supervisor",
+      scenario: "phd",
+      title: "博士要先判断有没有合适导师",
+      content: "博士申请最怕先按学校层级冲，再发现研究方向没有真正匹配的导师。公开博士申请经验普遍会先看导师、研究组、方法论和近年课题，再判断这所学校值不值得投。",
+      tags: ["博士", "导师", "研究组", "方向匹配"]
     }
   ];
   const stmt = db.prepare("INSERT OR IGNORE INTO knowledge_snippets (id, scenario, title, content, tags_json) VALUES (?, ?, ?, ?, ?)");
@@ -329,11 +392,18 @@ function collectScenarios(profile) {
   const scenarios = new Set(["general"]);
   const gpa = Number(profile.gpa || 0);
   const stageText = `${profile.stage || ""}${profile.educationStage || ""}`;
+  const destinationText = String(profile.destination || "");
+  const timelineText = String(profile.timeline || "");
   if (gpa > 0 && gpa < 84) scenarios.add("low-gpa");
   if (/转|跨专业/.test(`${profile.experience || ""}${profile.major || ""}`)) scenarios.add("transfer");
   if (/控制成本|预算|奖学金|性价比/.test(profile.budget || "")) scenarios.add("budget");
   if (/本科/.test(stageText)) scenarios.add("undergrad");
   if (/博士|phd|doctoral/i.test(stageText)) scenarios.add("phd");
+  if (/美国|USA|US/i.test(destinationText)) scenarios.add("us");
+  if (/英国|UK/i.test(destinationText)) scenarios.add("uk");
+  if (/香港|新加坡|港新/.test(destinationText)) scenarios.add("hk-sg");
+  if (/6-9|3-6|3 个月|6 个月|尽快|本轮/.test(timelineText)) scenarios.add("late-timeline");
+  if (/9-12|12 个月|一年|长期准备/.test(timelineText)) scenarios.add("early-timeline");
   return Array.from(scenarios);
 }
 
