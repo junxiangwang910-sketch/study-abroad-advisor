@@ -209,6 +209,20 @@ function seedKnowledgeSnippets(db) {
       tags: ["港新", "梯度", "量化", "热门项目"]
     },
     {
+      id: "study-au-course-choice",
+      scenario: "australia",
+      title: "澳洲申请先看课程类型和实际路径",
+      content: "澳洲官方留学指引会先区分本科、授课型硕士、研究型硕士和博士。申请判断不能只看学校名气，还要先分清自己适合 coursework 还是 research，以及项目是否真的承接你的下一步目标。",
+      tags: ["澳洲", "coursework", "research", "路径"]
+    },
+    {
+      id: "study-au-cost-support",
+      scenario: "australia",
+      title: "澳洲要把成本和支持体系一起看",
+      content: "澳洲官方信息会提醒国际学生同时比较课程、学校、地区生活成本、支持服务和奖助学金。对预算有限的人来说，城市和总成本经常和学校名气一样重要。",
+      tags: ["澳洲", "生活成本", "支持体系", "奖学金"]
+    },
+    {
       id: "study-undergrad-subject-commitment",
       scenario: "undergrad",
       title: "本科申请更看学科承诺和长期性",
@@ -230,6 +244,27 @@ function seedKnowledgeSnippets(db) {
       tags: ["本科", "活动", "主题", "连续性"]
     },
     {
+      id: "study-au-undergrad-structure",
+      scenario: "au-undergrad",
+      title: "澳洲本科更适合先看学位结构",
+      content: "澳洲官方课程介绍会明确学位时长、专业方向和 majors/minors 结构。申请澳洲本科时，不要只看学校排名，要先判断课程结构、专业方向和自己未来计划是否一致。",
+      tags: ["澳洲本科", "课程结构", "major", "minor"]
+    },
+    {
+      id: "study-au-masters-types",
+      scenario: "au-masters",
+      title: "澳洲硕士先分清授课型还是研究型",
+      content: "澳洲官方路径里，授课型硕士和研究型硕士的目标完全不同。授课型更偏职业和课程训练，研究型更偏论文和进一步读博。用户如果目标没说清，这一步很容易选错。",
+      tags: ["澳洲硕士", "授课型", "研究型", "读博路径"]
+    },
+    {
+      id: "study-au-masters-experience",
+      scenario: "au-masters",
+      title: "澳洲硕士有时会接受相关工作经验",
+      content: "澳洲官方项目介绍会明确，一些硕士除了本科背景，也可能接受显著相关工作经验。对跨专业或背景不完全匹配的人，这意味着项目筛选时要更仔细核对要求，而不是直接放弃。",
+      tags: ["澳洲硕士", "工作经验", "项目要求", "转专业"]
+    },
+    {
       id: "study-phd-fit",
       scenario: "phd",
       title: "博士申请核心是研究契合",
@@ -249,6 +284,13 @@ function seedKnowledgeSnippets(db) {
       title: "博士要先判断有没有合适导师",
       content: "博士申请最怕先按学校层级冲，再发现研究方向没有真正匹配的导师。公开博士申请经验普遍会先看导师、研究组、方法论和近年课题，再判断这所学校值不值得投。",
       tags: ["博士", "导师", "研究组", "方向匹配"]
+    },
+    {
+      id: "study-au-research-entry",
+      scenario: "au-research",
+      title: "澳洲研究型项目会看研究训练和导师支持",
+      content: "澳洲公开研究型申请要求常明确看研究项目经历、研究计划、是否有导师支持、以及本科或硕士阶段的研究训练比例。研究经历不足时，申请人要先判断自己是否真的适合直接申研究型项目。",
+      tags: ["澳洲研究", "导师支持", "研究训练", "研究计划"]
     }
   ];
   const stmt = db.prepare("INSERT OR IGNORE INTO knowledge_snippets (id, scenario, title, content, tags_json) VALUES (?, ?, ?, ?, ?)");
@@ -402,8 +444,12 @@ function collectScenarios(profile) {
   if (/美国|USA|US/i.test(destinationText)) scenarios.add("us");
   if (/英国|UK/i.test(destinationText)) scenarios.add("uk");
   if (/香港|新加坡|港新/.test(destinationText)) scenarios.add("hk-sg");
+  if (/澳大利亚|澳洲|Australia|AU/i.test(destinationText)) scenarios.add("australia");
   if (/6-9|3-6|3 个月|6 个月|尽快|本轮/.test(timelineText)) scenarios.add("late-timeline");
   if (/9-12|12 个月|一年|长期准备/.test(timelineText)) scenarios.add("early-timeline");
+  if (/澳大利亚|澳洲|Australia|AU/i.test(destinationText) && /本科/.test(stageText)) scenarios.add("au-undergrad");
+  if (/澳大利亚|澳洲|Australia|AU/i.test(destinationText) && /硕士/.test(stageText)) scenarios.add("au-masters");
+  if (/澳大利亚|澳洲|Australia|AU/i.test(destinationText) && /博士|phd|doctoral/i.test(stageText)) scenarios.add("au-research");
   return Array.from(scenarios);
 }
 
