@@ -95,9 +95,15 @@ body::before {
   width: 44px;
   height: 44px;
   border-radius: 8px;
-  color: white;
-  font-weight: 800;
+  overflow: hidden;
   background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .brand span:last-child {
@@ -142,6 +148,30 @@ body::before {
   background:
     linear-gradient(90deg, rgba(9, 34, 42, 0.86), rgba(9, 34, 42, 0.35)),
     url("https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1800&q=80") center/cover;
+}
+
+.hero-avatar {
+  position: absolute;
+  top: 28px;
+  right: 30px;
+  z-index: 1;
+  width: 88px;
+  height: 88px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 38px rgba(8, 31, 38, 0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hero-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 18px;
+  object-fit: cover;
 }
 
 .hero-content {
@@ -811,6 +841,14 @@ textarea:focus {
 
   .topbar nav {
     justify-content: flex-start;
+  }
+
+  .hero-avatar {
+    width: 72px;
+    height: 72px;
+    top: 22px;
+    right: 22px;
+    border-radius: 20px;
   }
 
   .advisor-grid,

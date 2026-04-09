@@ -1,0 +1,34 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="friendlyBg" x1="126" y1="108" x2="904" y2="904" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E7F3F5"/>
+      <stop offset="0.55" stop-color="#F7FBFC"/>
+      <stop offset="1" stop-color="#DDECEF"/>
+    </linearGradient>
+    <linearGradient id="friendlyCore" x1="286" y1="218" x2="734" y2="798" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12313A"/>
+      <stop offset="0.58" stop-color="#0F6F7D"/>
+      <stop offset="1" stop-color="#0B5965"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" rx="232" fill="url(#friendlyBg)"/>
+
+  <g opacity="0.08">
+    <path d="M0 256H1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M0 512H1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M0 768H1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M256 0V1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M512 0V1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M768 0V1024" stroke="#12313A" stroke-width="2"/>
+  </g>
+
+  <rect x="208" y="196" width="608" height="608" rx="180" fill="url(#friendlyCore)"/>
+  <rect x="236" y="224" width="552" height="552" rx="156" stroke="rgba(255,255,255,0.16)" stroke-width="4"/>
+
+  <circle cx="748" cy="274" r="26" fill="#D36B31"/>
+  <circle cx="300" cy="736" r="18" fill="#67D3DF"/>
+
+  <text x="512" y="590" text-anchor="middle" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="320" font-weight="900">留</text>
+  <text x="512" y="860" text-anchor="middle" fill="#12313A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="88" font-weight="900">留学宝</text>
+</svg>

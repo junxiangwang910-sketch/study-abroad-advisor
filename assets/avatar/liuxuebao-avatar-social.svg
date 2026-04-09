@@ -1,0 +1,35 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="socialBg" x1="110" y1="90" x2="908" y2="924" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF6F8"/>
+      <stop offset="0.58" stop-color="#F9FBFC"/>
+      <stop offset="1" stop-color="#E0EDF1"/>
+    </linearGradient>
+    <linearGradient id="socialCore" x1="290" y1="218" x2="736" y2="792" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12313A"/>
+      <stop offset="0.54" stop-color="#0F6F7D"/>
+      <stop offset="1" stop-color="#0B5A66"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" rx="232" fill="url(#socialBg)"/>
+
+  <g opacity="0.07">
+    <path d="M0 256H1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M0 512H1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M0 768H1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M256 0V1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M512 0V1024" stroke="#12313A" stroke-width="2"/>
+    <path d="M768 0V1024" stroke="#12313A" stroke-width="2"/>
+  </g>
+
+  <rect x="228" y="188" width="568" height="568" rx="172" fill="url(#socialCore)"/>
+  <rect x="248" y="208" width="528" height="528" rx="152" stroke="rgba(255,255,255,0.14)" stroke-width="4"/>
+  <circle cx="754" cy="262" r="24" fill="#D36B31"/>
+
+  <path d="M390 528C390 457.307 447.307 400 518 400H620C649.823 400 674 424.177 674 454V566C674 595.823 649.823 620 620 620H438C411.49 620 390 598.51 390 572V528Z" fill="white"/>
+  <path d="M418 446H566C588.091 446 606 463.909 606 486V566H450C432.327 566 418 551.673 418 534V446Z" fill="#DDF3F6"/>
+  <path d="M418 462L512 508L606 462" stroke="#0F6F7D" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="512" y="864" text-anchor="middle" fill="#12313A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="94" font-weight="900">留学宝</text>
+</svg>

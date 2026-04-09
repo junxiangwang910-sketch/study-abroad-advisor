@@ -1,0 +1,39 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="132" y1="104" x2="892" y2="922" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12313A"/>
+      <stop offset="0.58" stop-color="#0F6F7D"/>
+      <stop offset="1" stop-color="#0B5965"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(774 210) rotate(133.781) scale(498.459)">
+      <stop stop-color="white" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="176" y="176" width="672" height="672" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="32" stdDeviation="30" flood-color="#0C2830" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="240" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="240" fill="url(#glow)"/>
+
+  <g opacity="0.08">
+    <path d="M0 272H1024" stroke="white" stroke-width="2"/>
+    <path d="M0 512H1024" stroke="white" stroke-width="2"/>
+    <path d="M0 752H1024" stroke="white" stroke-width="2"/>
+    <path d="M272 0V1024" stroke="white" stroke-width="2"/>
+    <path d="M512 0V1024" stroke="white" stroke-width="2"/>
+    <path d="M752 0V1024" stroke="white" stroke-width="2"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="512" cy="512" r="306" fill="rgba(255,255,255,0.1)"/>
+    <circle cx="512" cy="512" r="294" stroke="rgba(255,255,255,0.16)" stroke-width="4"/>
+  </g>
+
+  <circle cx="736" cy="304" r="26" fill="#D36B31"/>
+  <circle cx="294" cy="730" r="16" fill="#67D3DF" opacity="0.95"/>
+
+  <text x="512" y="610" text-anchor="middle" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="356" font-weight="900">留</text>
+  <text x="512" y="756" text-anchor="middle" fill="rgba(255,255,255,0.76)" font-family="'Outfit', 'Noto Sans SC', sans-serif" font-size="84" font-weight="800" letter-spacing="16">STUDYPATH</text>
+</svg>

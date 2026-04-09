@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留学宝 | 宣传图</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #122026;
+      --muted: #5d7078;
+      --brand: #0f6f7d;
+      --brand-dark: #12313a;
+      --accent: #d36b31;
+      --line: rgba(18, 32, 38, 0.12);
+      --shadow: 0 24px 70px rgba(10, 40, 50, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Outfit", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(18, 32, 38, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 32, 38, 0.03) 1px, transparent 1px),
+        linear-gradient(180deg, #e6f0f2 0%, #f7fbfc 52%, #e5eef1 100%);
+      background-size: 32px 32px, 32px 32px, auto;
+    }
+
+    .page {
+      width: min(980px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 20px 0 40px;
+    }
+
+    .header {
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--brand);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 1.9rem;
+    }
+
+    .header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .cover {
+      position: relative;
+      width: 640px;
+      min-height: 860px;
+      margin: 0 auto;
+      padding: 28px 30px 24px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: linear-gradient(160deg, #14333c 0%, #0f6f7d 100%);
+    }
+
+    .cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(255,255,255,0.08), transparent 24%);
+    }
+
+    .top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-pill,
+    .tag-pill,
+    .pill-row span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .brand-pill {
+      color: var(--brand-dark);
+      background: rgba(255,255,255,0.94);
+    }
+
+    .tag-pill {
+      color: #67d3df;
+      background: rgba(255,255,255,0.12);
+      letter-spacing: 0.08em;
+    }
+
+    .avatar-area {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      margin-top: 42px;
+    }
+
+    .avatar-shell {
+      display: grid;
+      place-items: center;
+      width: 236px;
+      height: 236px;
+      padding: 16px;
+      border-radius: 64px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 22px 42px rgba(8, 31, 38, 0.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .avatar-shell img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 52px;
+      object-fit: cover;
+      background: white;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      margin-top: 40px;
+      color: white;
+    }
+
+    .content h2 {
+      margin: 0;
+      font-size: 2.9rem;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .content h2 span {
+      display: block;
+    }
+
+    .content h2 .accent {
+      margin-top: 8px;
+      color: #f0a06d;
+    }
+
+    .content p {
+      margin: 16px 0 0;
+      max-width: 24ch;
+      color: rgba(255,255,255,0.84);
+      font-size: 1rem;
+      line-height: 1.75;
+      font-weight: 600;
+    }
+
+    .pill-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .pill-row span {
+      color: white;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .info {
+      position: relative;
+      z-index: 1;
+      margin-top: 24px;
+      padding: 16px 16px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.92);
+      color: var(--ink);
+    }
+
+    .info strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .info ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .info li {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .footer {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 24px;
+      z-index: 1;
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-radius: 12px;
+      color: white;
+      background: rgba(255,255,255,0.12);
+      font-size: 0.84rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <p class="eyebrow">Promo Cover</p>
+      <h1>留学宝宣传图</h1>
+      <p>直接截图下面这张卡片就能用，风格和你刚刚选中的极简头像一致。</p>
+    </header>
+
+    <section class="cover">
+      <div class="top">
+        <span class="brand-pill">留学宝</span>
+        <span class="tag-pill">申请评估</span>
+      </div>
+
+      <div class="avatar-area">
+        <div class="avatar-shell">
+          <img src="assets/avatar/liuxuebao-avatar-minimal.svg" alt="留学宝极简头像">
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>
+          <span>输入背景</span>
+          <span class="accent">自动生成定位报告</span>
+        </h2>
+        <p>适合本科、硕士、博士申请前先做一次方向判断。先看冲刺、匹配、保底，再决定下一步怎么投。</p>
+      </div>
+
+      <div class="pill-row">
+        <span>选校梯度</span>
+        <span>风险判断</span>
+        <span>90 天行动计划</span>
+      </div>
+
+      <div class="info">
+        <strong>留学宝会直接给你</strong>
+        <ul>
+          <li>冲刺 / 匹配 / 保底组合</li>
+          <li>当前背景最该补的地方</li>
+          <li>下一步申请顺序和重点</li>
+        </ul>
+      </div>
+
+      <div class="footer">先做定位，再决定要不要花大钱找中介或升级人工一对一辅导。</div>
+    </section>
+  </main>
+</body>
+</html>

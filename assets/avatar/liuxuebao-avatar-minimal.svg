@@ -1,0 +1,24 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="minimalBg" x1="136" y1="106" x2="886" y2="918" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F1F7F8"/>
+      <stop offset="0.58" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E3EEF1"/>
+    </linearGradient>
+    <linearGradient id="minimalAccent" x1="356" y1="272" x2="664" y2="746" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12313A"/>
+      <stop offset="0.58" stop-color="#0F6F7D"/>
+      <stop offset="1" stop-color="#0A5661"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" rx="232" fill="url(#minimalBg)"/>
+  <rect x="86" y="86" width="852" height="852" rx="196" stroke="rgba(18,32,38,0.08)" stroke-width="4"/>
+  <circle cx="742" cy="282" r="24" fill="#D36B31"/>
+
+  <circle cx="512" cy="498" r="250" fill="rgba(15,111,125,0.08)"/>
+  <path d="M372 370H454V598C454 629.48 479.52 655 511 655H650V736H511C434.785 736 373 674.215 373 598L372 370Z" fill="url(#minimalAccent)"/>
+  <path d="M510 655L650 515V655H510Z" fill="#67D3DF"/>
+
+  <text x="512" y="864" text-anchor="middle" fill="#12313A" font-family="'Outfit', 'Noto Sans SC', sans-serif" font-size="72" font-weight="800" letter-spacing="10">STUDY PATH</text>
+</svg>

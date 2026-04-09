@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留学宝 | 头像预览</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #edf3f5;
+      --ink: #122026;
+      --muted: #5d7078;
+      --line: rgba(18, 32, 38, 0.12);
+      --brand: #0f6f7d;
+      --surface: rgba(255, 255, 255, 0.88);
+      --shadow: 0 24px 70px rgba(10, 40, 50, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Outfit", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(18, 32, 38, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 32, 38, 0.03) 1px, transparent 1px),
+        linear-gradient(180deg, #e6f0f2 0%, #f7fbfc 52%, #e5eef1 100%);
+      background-size: 32px 32px, 32px 32px, auto;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .header {
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--brand);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+
+    .note {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .avatar-stage {
+      display: grid;
+      place-items: center;
+      min-height: 360px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #dfecef 0%, #f3f7f8 56%, #e6eff1 100%);
+    }
+
+    .avatar-stage img {
+      width: 260px;
+      height: 260px;
+      display: block;
+      border-radius: 64px;
+      box-shadow: 0 24px 48px rgba(18, 32, 38, 0.16);
+    }
+
+    .card h2 {
+      margin: 16px 0 8px;
+      font-size: 1.18rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .avatar-stage {
+        min-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <p class="eyebrow">Avatar Preview</p>
+      <h1>留学宝头像预览页</h1>
+      <p class="note">你直接打开这个页面，然后单独截图每张头像卡片就行。这样看到的效果，比我直接导 PNG 更接近你最后拿去用的样子。</p>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <div class="avatar-stage">
+          <img src="assets/avatar/liuxuebao-avatar-premium.svg" alt="留学宝高级版头像">
+        </div>
+        <h2>高级版</h2>
+        <p>更像正式品牌头像，适合官网、公众号和偏正式的教育产品形象。</p>
+      </article>
+
+      <article class="card">
+        <div class="avatar-stage">
+          <img src="assets/avatar/liuxuebao-avatar-social.svg" alt="留学宝社交版头像">
+        </div>
+        <h2>社交版</h2>
+        <p>更适合小红书、微信和社交平台，既有品牌感，也不会太硬。</p>
+      </article>
+
+      <article class="card">
+        <div class="avatar-stage">
+          <img src="assets/avatar/liuxuebao-avatar-minimal.svg" alt="留学宝极简版头像">
+        </div>
+        <h2>极简版</h2>
+        <p>更干净、偏现代，缩小后也容易认，适合想走克制路线的时候用。</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
