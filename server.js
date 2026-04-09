@@ -104,6 +104,13 @@ function seedKnowledgeSnippets(db) {
       tags: ["文书", "经历", "证据链", "故事线"]
     },
     {
+      id: "study-whole-profile",
+      scenario: "general",
+      title: "招生方看的是整体画像",
+      content: "公开招生建议反复强调，学校不会只看一个数字。成绩、经历、推荐信、文书、目标契合度和长期路径通常会一起判断，所以申请策略也不能只围绕一个短板打转。",
+      tags: ["整体画像", "多维判断", "成绩", "契合度"]
+    },
+    {
       id: "study-recommendation-quality",
       scenario: "general",
       title: "推荐信看熟悉度不是头衔",
@@ -242,6 +249,55 @@ function seedKnowledgeSnippets(db) {
       title: "本科活动要围绕主题收束",
       content: "公开本科申请指导反复提醒，活动不必面面俱到，更重要的是围绕一个主题形成连续性：学科兴趣、领导力、服务、创作或竞赛，只要能解释成长脉络，就比堆数量更有说服力。",
       tags: ["本科", "活动", "主题", "连续性"]
+    },
+    {
+      id: "study-business-leadership",
+      scenario: "business",
+      title: "商科更看领导力、量化和成长轨迹",
+      content: "公开商学院招生标准通常会同时看三件事：是否有商业问题意识、是否展现领导力或影响力、以及是否能证明量化能力和成长性。没有正式管理 title 也可以，但要能讲清影响。",
+      tags: ["商科", "领导力", "量化", "成长轨迹"]
+    },
+    {
+      id: "study-business-values",
+      scenario: "business",
+      title: "商科文书更怕空泛成功学",
+      content: "公开 MBA / 管理类申请建议很强调真实价值观和未来影响，不喜欢只有套话的成功叙事。比起说想做领导者，更重要的是讲清你为什么在意某类问题、怎么形成判断、未来想创造什么影响。",
+      tags: ["商科", "价值观", "影响力", "文书"]
+    },
+    {
+      id: "study-cs-proof",
+      scenario: "cs-data",
+      title: "计算机和数据申请更看准备度和技术证据",
+      content: "公开 CS 申请要求通常强调准备度：先修课、数学基础、研究兴趣、技术项目和推荐信细节。仅仅写对 AI 感兴趣不够，最好能拿出课程、代码、论文、项目结果或竞赛证明。",
+      tags: ["计算机", "数据", "先修课", "技术项目"]
+    },
+    {
+      id: "study-cs-academic-recommendations",
+      scenario: "cs-data",
+      title: "CS 更依赖学术型推荐信和具体例子",
+      content: "公开计算机项目说明里，推荐信通常更看分析能力、独立思考、组织表达和研究潜力，而且越具体越有说服力。相比泛泛夸赞，能写出课程、项目或研究细节的推荐信更值钱。",
+      tags: ["计算机", "推荐信", "分析能力", "研究潜力"]
+    },
+    {
+      id: "study-education-reflection",
+      scenario: "education",
+      title: "教育类申请更看实践反思和问题意识",
+      content: "教育类项目往往不只是看教学经历本身，更看你如何理解学习者、课堂、制度和教育公平问题。公开申请建议里，能把实践经验转成反思和方法判断的文书更强。",
+      tags: ["教育", "教学实践", "反思", "问题意识"]
+    },
+    {
+      id: "study-law-policy-logic",
+      scenario: "law-policy",
+      title: "法律与公共政策更看逻辑和公共性",
+      content: "法政和公共政策类申请通常更在意你如何定义问题、分析利益相关方、理解制度约束并提出路径。相比宏大口号，清晰的问题结构和现实感更重要。",
+      tags: ["法律", "公共政策", "逻辑", "问题定义"]
+    },
+    {
+      id: "study-media-portfolio",
+      scenario: "media-design",
+      title: "传媒与创意方向更看作品和表达风格",
+      content: "公开传媒、传播和创意类项目要求常提示作品集、写作样本、视频、项目链接或内容成果的重要性。光说热爱表达不够，最好能拿出你如何表达、影响了谁、形成了什么风格的证据。",
+      tags: ["传媒", "作品集", "写作样本", "表达风格"]
     },
     {
       id: "study-au-undergrad-structure",
@@ -436,6 +492,7 @@ function collectScenarios(profile) {
   const stageText = `${profile.stage || ""}${profile.educationStage || ""}`;
   const destinationText = String(profile.destination || "");
   const timelineText = String(profile.timeline || "");
+  const majorText = String(profile.major || "").toLowerCase();
   if (gpa > 0 && gpa < 84) scenarios.add("low-gpa");
   if (/转|跨专业/.test(`${profile.experience || ""}${profile.major || ""}`)) scenarios.add("transfer");
   if (/控制成本|预算|奖学金|性价比/.test(profile.budget || "")) scenarios.add("budget");
@@ -450,6 +507,11 @@ function collectScenarios(profile) {
   if (/澳大利亚|澳洲|Australia|AU/i.test(destinationText) && /本科/.test(stageText)) scenarios.add("au-undergrad");
   if (/澳大利亚|澳洲|Australia|AU/i.test(destinationText) && /硕士/.test(stageText)) scenarios.add("au-masters");
   if (/澳大利亚|澳洲|Australia|AU/i.test(destinationText) && /博士|phd|doctoral/i.test(stageText)) scenarios.add("au-research");
+  if (/商|管理|finance|mba|business|marketing|accounting|economics/.test(majorText)) scenarios.add("business");
+  if (/计算机|数据|ai|computer|cs|software|analytics|machine learning|data/.test(majorText)) scenarios.add("cs-data");
+  if (/教育|teaching|education|tesol|curriculum/.test(majorText)) scenarios.add("education");
+  if (/法律|法学|policy|public policy|governance|law|international relations/.test(majorText)) scenarios.add("law-policy");
+  if (/传媒|传播|media|journalism|communication|film|design|creative/.test(majorText)) scenarios.add("media-design");
   return Array.from(scenarios);
 }
 
