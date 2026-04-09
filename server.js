@@ -111,6 +111,20 @@ function seedKnowledgeSnippets(db) {
       tags: ["整体画像", "多维判断", "成绩", "契合度"]
     },
     {
+      id: "study-employability-path",
+      scenario: "career-oriented",
+      title: "就业导向申请更看路径可落地",
+      content: "公开就业与升学结果里，正向样本通常不是单纯名校最高，而是课程训练、实习机会、地区资源、签证/求职路径和个人背景能接得上。就业导向用户要优先看可落地路径，而不是只看头部名气。",
+      tags: ["就业导向", "可落地路径", "地区资源", "实习机会"]
+    },
+    {
+      id: "study-positive-outcomes",
+      scenario: "career-oriented",
+      title: "正向结果样本通常有共同特征",
+      content: "公开的正向就业结果样本往往具备几个共同点：课程和目标行业贴得近、在读期间有实习或项目、申请时就考虑毕业去向、并且学校所在地区能提供真实机会。申请策略应主动朝这些特征靠近。",
+      tags: ["就业结果", "行业贴合", "实习", "毕业去向"]
+    },
+    {
       id: "study-recommendation-quality",
       scenario: "general",
       title: "推荐信看熟悉度不是头衔",
@@ -209,11 +223,25 @@ function seedKnowledgeSnippets(db) {
       tags: ["英国", "尽早申请", "滚动录取", "奖学金"]
     },
     {
+      id: "study-uk-career-signal",
+      scenario: "uk",
+      title: "英国就业导向要关注课程与行业连接",
+      content: "英国申请里，正向就业样本通常更看课程模块、placement、行业项目、校友网络和所在城市资源。对就业优先的人来说，课程和行业连接度常常比综合排名更影响结果。",
+      tags: ["英国", "就业", "placement", "行业连接"]
+    },
+    {
       id: "study-hk-sg-balance",
       scenario: "hk-sg",
       title: "港新申请要兼顾排名与落地性",
       content: "港新项目普遍节奏快、申请集中，公开经验里常见误区是只盯最热门项目，忽略课程匹配、量化要求和整体梯度。更稳的做法是把热门项目和更适合自己背景的项目同时放进组合。",
       tags: ["港新", "梯度", "量化", "热门项目"]
+    },
+    {
+      id: "study-hk-sg-career",
+      scenario: "hk-sg",
+      title: "港新正向就业样本更看适应快和技能对口",
+      content: "公开港新就业结果里，正向样本常见于量化能力、英语表达、实习经历和行业匹配都较完整的申请人。对求职导向用户，申请时就应优先选择和目标行业技能要求更贴合的项目。",
+      tags: ["港新", "就业", "量化能力", "实习经历"]
     },
     {
       id: "study-au-course-choice",
@@ -228,6 +256,13 @@ function seedKnowledgeSnippets(db) {
       title: "澳洲要把成本和支持体系一起看",
       content: "澳洲官方信息会提醒国际学生同时比较课程、学校、地区生活成本、支持服务和奖助学金。对预算有限的人来说，城市和总成本经常和学校名气一样重要。",
       tags: ["澳洲", "生活成本", "支持体系", "奖学金"]
+    },
+    {
+      id: "study-au-employability",
+      scenario: "australia",
+      title: "澳洲正向就业样本常伴随实习和工作经验",
+      content: "澳洲官方就业建议强调实习、工作经验、可迁移技能和毕业后求职路径。正向结果样本通常不是只读完课就等 offer，而是在申请时就考虑课程能否带来实践、签证路径和本地经验。",
+      tags: ["澳洲", "就业", "实习", "本地经验"]
     },
     {
       id: "study-undergrad-subject-commitment",
@@ -265,6 +300,13 @@ function seedKnowledgeSnippets(db) {
       tags: ["商科", "价值观", "影响力", "文书"]
     },
     {
+      id: "study-business-career",
+      scenario: "business",
+      title: "商科正向结果更看职业目标是否清晰",
+      content: "商科类正向录取和就业样本往往都有明确职业方向，例如咨询、金融、产品、运营或创业。申请时如果目标模糊，后续不论选校还是实习都会发散，结果也更难稳定。",
+      tags: ["商科", "职业目标", "咨询", "金融"]
+    },
+    {
       id: "study-cs-proof",
       scenario: "cs-data",
       title: "计算机和数据申请更看准备度和技术证据",
@@ -277,6 +319,13 @@ function seedKnowledgeSnippets(db) {
       title: "CS 更依赖学术型推荐信和具体例子",
       content: "公开计算机项目说明里，推荐信通常更看分析能力、独立思考、组织表达和研究潜力，而且越具体越有说服力。相比泛泛夸赞，能写出课程、项目或研究细节的推荐信更值钱。",
       tags: ["计算机", "推荐信", "分析能力", "研究潜力"]
+    },
+    {
+      id: "study-cs-career",
+      scenario: "cs-data",
+      title: "CS 与数据方向更容易被就业结果反推",
+      content: "计算机和数据方向的正向结果样本通常很容易反推：课程是否补足核心能力、项目是否能展示技术深度、地区是否有岗位、实习是否能接上。申请策略可以更直接围绕这些结果变量设计。",
+      tags: ["计算机", "数据", "就业", "技术深度"]
     },
     {
       id: "study-education-reflection",
@@ -298,6 +347,13 @@ function seedKnowledgeSnippets(db) {
       title: "传媒与创意方向更看作品和表达风格",
       content: "公开传媒、传播和创意类项目要求常提示作品集、写作样本、视频、项目链接或内容成果的重要性。光说热爱表达不够，最好能拿出你如何表达、影响了谁、形成了什么风格的证据。",
       tags: ["传媒", "作品集", "写作样本", "表达风格"]
+    },
+    {
+      id: "study-media-career",
+      scenario: "media-design",
+      title: "传媒创意方向更看作品是否能转成机会",
+      content: "传媒和创意方向的正向就业结果样本，通常都不是纸面热爱，而是作品、平台、内容生产能力和行业理解已经能对接真实机会。申请时最好把作品和职业方向一起讲清楚。",
+      tags: ["传媒", "就业", "作品", "职业方向"]
     },
     {
       id: "study-au-undergrad-structure",
@@ -493,9 +549,11 @@ function collectScenarios(profile) {
   const destinationText = String(profile.destination || "");
   const timelineText = String(profile.timeline || "");
   const majorText = String(profile.major || "").toLowerCase();
+  const budgetText = String(profile.budget || "");
+  const experienceText = String(profile.experience || "");
   if (gpa > 0 && gpa < 84) scenarios.add("low-gpa");
   if (/转|跨专业/.test(`${profile.experience || ""}${profile.major || ""}`)) scenarios.add("transfer");
-  if (/控制成本|预算|奖学金|性价比/.test(profile.budget || "")) scenarios.add("budget");
+  if (/控制成本|预算|奖学金|性价比/.test(budgetText)) scenarios.add("budget");
   if (/本科/.test(stageText)) scenarios.add("undergrad");
   if (/博士|phd|doctoral/i.test(stageText)) scenarios.add("phd");
   if (/美国|USA|US/i.test(destinationText)) scenarios.add("us");
@@ -512,6 +570,7 @@ function collectScenarios(profile) {
   if (/教育|teaching|education|tesol|curriculum/.test(majorText)) scenarios.add("education");
   if (/法律|法学|policy|public policy|governance|law|international relations/.test(majorText)) scenarios.add("law-policy");
   if (/传媒|传播|media|journalism|communication|film|design|creative/.test(majorText)) scenarios.add("media-design");
+  if (/就业|找工作|实习|留用|落地|移民|求职/.test(`${budgetText}${timelineText}${experienceText}`)) scenarios.add("career-oriented");
   return Array.from(scenarios);
 }
 
