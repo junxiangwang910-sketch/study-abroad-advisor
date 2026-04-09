@@ -1,0 +1,60 @@
+<svg width="1242" height="1660" viewBox="0 0 1242 1660" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="120" y1="60" x2="1100" y2="1520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E6F3F5"/>
+      <stop offset="0.58" stop-color="#F7FBFC"/>
+      <stop offset="1" stop-color="#E3EEF1"/>
+    </linearGradient>
+    <linearGradient id="panel1" x1="170" y1="220" x2="990" y2="1220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#13313A"/>
+      <stop offset="1" stop-color="#0E5D68"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#D36B31"/>
+      <stop offset="1" stop-color="#F09A63"/>
+    </linearGradient>
+    <filter id="shadow1" x="120" y="146" width="1002" height="1198" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="28" stdDeviation="28" flood-color="#23444D" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1242" height="1660" rx="48" fill="url(#bg1)"/>
+  <path d="M0 0H1242V280C1099 319 954 338 808 338C518 338 258 260 0 126V0Z" fill="#DCECEF"/>
+  <path d="M1242 1660H0V1420C232 1308 441 1260 636 1260C846 1260 1048 1322 1242 1450V1660Z" fill="#DBE9ED"/>
+
+  <text x="110" y="132" fill="#0F6F7D" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="48" font-weight="800">留学宝</text>
+  <text x="110" y="186" fill="#5D7078" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="28" font-weight="600">留学定位报告</text>
+
+  <g filter="url(#shadow1)">
+    <rect x="160" y="186" width="922" height="1118" rx="34" fill="url(#panel1)"/>
+  </g>
+
+  <rect x="214" y="252" width="210" height="62" rx="18" fill="rgba(255,255,255,0.12)"/>
+  <text x="248" y="295" fill="#67D3DF" font-family="'Outfit', 'Noto Sans SC', sans-serif" font-size="28" font-weight="800" letter-spacing="1">LOW GPA</text>
+
+  <text x="214" y="406" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="98" font-weight="900">均分不高</text>
+  <text x="214" y="522" fill="#F09A63" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="98" font-weight="900">还能申好吗</text>
+
+  <text x="214" y="614" fill="rgba(255,255,255,0.82)" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="34" font-weight="600">别先放弃，先看定位有没有冲过头。</text>
+
+  <rect x="214" y="700" width="814" height="158" rx="26" fill="rgba(255,255,255,0.09)" stroke="rgba(255,255,255,0.18)"/>
+  <circle cx="278" cy="764" r="28" fill="url(#accent1)"/>
+  <text x="264" y="774" fill="white" font-family="'Outfit', sans-serif" font-size="26" font-weight="800">1</text>
+  <text x="332" y="756" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="38" font-weight="800">先看项目要求，不只看排名</text>
+  <text x="332" y="808" fill="rgba(255,255,255,0.76)" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="500">低 GPA 最怕盲冲名校，不是最怕没有机会。</text>
+
+  <rect x="214" y="900" width="390" height="214" rx="26" fill="rgba(255,255,255,0.92)"/>
+  <text x="252" y="958" fill="#0F6F7D" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="32" font-weight="800">系统会看什么</text>
+  <text x="252" y="1022" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">GPA 所在区间</text>
+  <text x="252" y="1070" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">项目卡不卡均分</text>
+  <text x="252" y="1118" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">经历能不能补回来</text>
+
+  <rect x="638" y="900" width="390" height="214" rx="26" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.18)"/>
+  <text x="676" y="958" fill="#67D3DF" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="32" font-weight="800">看完能得到</text>
+  <text x="676" y="1022" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">冲刺 / 匹配 / 保底</text>
+  <text x="676" y="1070" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">当前最大风险点</text>
+  <text x="676" y="1118" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">90 天补强动作</text>
+
+  <rect x="214" y="1160" width="814" height="72" rx="22" fill="rgba(255,255,255,0.12)"/>
+  <text x="252" y="1208" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="30" font-weight="700">先做定位，再决定要不要花大钱找中介。</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg width="1242" height="1660" viewBox="0 0 1242 1660" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="70" y1="40" x2="1120" y2="1580" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F1F7F8"/>
+      <stop offset="0.55" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E6EFF1"/>
+    </linearGradient>
+    <linearGradient id="panel2" x1="171" y1="202" x2="1004" y2="1260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E5D68"/>
+      <stop offset="1" stop-color="#12313A"/>
+    </linearGradient>
+    <filter id="shadow2" x="126" y="156" width="990" height="1238" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="26" stdDeviation="28" flood-color="#294A53" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1242" height="1660" rx="48" fill="url(#bg2)"/>
+  <circle cx="1090" cy="186" r="220" fill="#DDECEF"/>
+  <circle cx="132" cy="1496" r="240" fill="#D8E9ED"/>
+
+  <text x="112" y="132" fill="#0F6F7D" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="48" font-weight="800">留学宝</text>
+  <text x="112" y="186" fill="#5D7078" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="28" font-weight="600">转专业申请图解</text>
+
+  <g filter="url(#shadow2)">
+    <rect x="160" y="192" width="922" height="1158" rx="34" fill="url(#panel2)"/>
+  </g>
+
+  <rect x="214" y="248" width="252" height="62" rx="18" fill="rgba(255,255,255,0.12)"/>
+  <text x="248" y="291" fill="#67D3DF" font-family="'Outfit', 'Noto Sans SC', sans-serif" font-size="28" font-weight="800" letter-spacing="1">SWITCH MAJOR</text>
+
+  <text x="214" y="394" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="94" font-weight="900">转专业申请</text>
+  <text x="214" y="504" fill="#67D3DF" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="94" font-weight="900">最怕乱讲故事</text>
+
+  <text x="214" y="592" fill="rgba(255,255,255,0.82)" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="34" font-weight="600">不是“想转就转”，而是先把路径讲通。</text>
+
+  <rect x="214" y="674" width="814" height="238" rx="28" fill="rgba(255,255,255,0.94)"/>
+  <text x="256" y="738" fill="#0F6F7D" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="34" font-weight="800">留学宝会先拆 4 件事</text>
+  <text x="256" y="802" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="27" font-weight="600">01 先修课够不够</text>
+  <text x="256" y="850" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="27" font-weight="600">02 项目经历能不能证明能力</text>
+  <text x="256" y="898" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="27" font-weight="600">03 文书主线是不是前后通顺</text>
+  <text x="256" y="946" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="27" font-weight="600">04 哪些学校接受背景切换</text>
+
+  <rect x="214" y="956" width="252" height="236" rx="26" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.18)"/>
+  <text x="246" y="1012" fill="#67D3DF" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="29" font-weight="800">容易踩坑</text>
+  <text x="246" y="1068" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">只说兴趣变了</text>
+  <text x="246" y="1116" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">没交代能力迁移</text>
+  <text x="246" y="1164" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">学校项目乱投</text>
+
+  <rect x="498" y="956" width="252" height="236" rx="26" fill="rgba(255,255,255,0.94)"/>
+  <text x="530" y="1012" fill="#0F6F7D" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="29" font-weight="800">系统会给</text>
+  <text x="530" y="1068" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">转专业可行性</text>
+  <text x="530" y="1116" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">路径清单</text>
+  <text x="530" y="1164" fill="#23343A" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" font-weight="600">文书故事线</text>
+
+  <rect x="782" y="956" width="246" height="236" rx="26" fill="#D36B31"/>
+  <text x="820" y="1034" fill="white" font-family="'Outfit', 'Noto Sans SC', sans-serif" font-size="24" font-weight="800">BEST USE</text>
+  <text x="820" y="1102" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="32" font-weight="800">跨商科</text>
+  <text x="820" y="1152" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="32" font-weight="800">跨数据</text>
+
+  <rect x="214" y="1230" width="814" height="60" rx="18" fill="rgba(255,255,255,0.12)"/>
+  <text x="252" y="1271" fill="white" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="28" font-weight="700">讲清“为什么能转”，比单纯说“我很热爱”更重要。</text>
+</svg>
