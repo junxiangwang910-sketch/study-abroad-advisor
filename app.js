@@ -16,6 +16,7 @@ const scoreMeter = document.querySelector("#scoreMeter");
 const tagRow = document.querySelector("#tagRow");
 const schoolList = document.querySelector("#schoolList");
 const insightList = document.querySelector("#insightList");
+const distilledList = document.querySelector("#distilledList");
 const routeList = document.querySelector("#routeList");
 const careerPathList = document.querySelector("#careerPathList");
 const topRouteText = document.querySelector("#topRouteText");
@@ -218,6 +219,13 @@ function renderReport(result) {
     </article>
   `).join("");
   insightList.innerHTML = (result.insights || []).map((item) => `<li>${text(item)}</li>`).join("");
+  distilledList.innerHTML = (result.distilledInsights || []).map((item) => `
+    <article class="distilled-card">
+      <h4>${text(item.title || "蒸馏经验")}</h4>
+      <p>${text(item.content || "")}</p>
+      <div class="tag-row">${(item.tags || []).slice(0, 4).map((tag) => `<span class="tag">${text(tag)}</span>`).join("")}</div>
+    </article>
+  `).join("");
   routeList.innerHTML = (result.routes || []).map((item) => `
     <article class="school-card">
       <h4>${text(item.name || "申请路线")}${item.label ? ` <span class="route-badge">${text(item.label)}</span>` : ""}</h4>
@@ -236,7 +244,7 @@ function renderReport(result) {
   timelineList.innerHTML = (result.roadmap || []).map((item) => `<li>${text(item)}</li>`).join("");
   premiumLead.textContent = result.premiumLead || "如果你想把路线真正做成录取结果，可以升级 1 对 1 服务。";
   premiumList.innerHTML = (result.premiumService || []).map((item) => `<li>${text(item)}</li>`).join("");
-  reportNote.textContent = `${result.provider === "deepseek" ? "大模型已生成" : "Demo 模式"} · 已结合公开申请经验模式库 · ${result.disclaimer || "本报告不代表录取承诺。"}`;
+  reportNote.textContent = `${result.provider === "deepseek" ? "大模型已生成" : "Demo 模式"} · 已结合公开经验蒸馏库 · ${result.disclaimer || "本报告不代表录取承诺。"}`;
   renderProfile(result.profile);
 
   emptyState.classList.add("hidden");

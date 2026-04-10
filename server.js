@@ -674,11 +674,13 @@ function fallbackAnalysis(profile, userProfile) {
   const target = profile.schoolTier || "高竞争项目";
   const gpa = Number(profile.gpa || 0);
   const fitScore = Math.max(35, Math.min(90, Math.round((gpa > 4.3 ? gpa : gpa * 0.85) + (target.includes("稳健") ? 10 : 0) + (target.includes("顶尖") ? -8 : 0))));
+  const distilledInsights = getKnowledgeSnippets(profile);
   return {
     provider: "demo",
     title: fitScore >= 78 ? "背景具备竞争力，但申请结构还需要更稳" : "当前更适合先纠偏，再决定冲刺范围",
     fitScore,
     tags: ["自动档案版", target, profile.major || "专业待定", profile.destination || "地区待定"],
+    distilledInsights,
     schoolStrategy: [
       { tier: "冲刺", advice: "保留 2-3 个理想项目，但不要把预算和时间全部压在冲刺档。" },
       { tier: "匹配", advice: "选择 5-7 个课程匹配、先修要求明确、就业资源稳定的项目作为主战场。" },
@@ -805,7 +807,7 @@ async function callDeepSeek(profile, userProfile) {
   const payload = await response.json();
   if (!response.ok) throw new Error(payload?.error?.message || "DeepSeek 请求失败");
   const outputText = payload.choices?.[0]?.message?.content || "";
-  return { provider: "deepseek", ...safeParseModelJson(outputText) };
+  return { provider: "deepseek", distilledInsights: snippets, ...safeParseModelJson(outputText) };
 }
 
 function serveStatic(req, res) {
