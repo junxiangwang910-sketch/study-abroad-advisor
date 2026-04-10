@@ -118,6 +118,55 @@ function seedKnowledgeSnippets(db) {
       tags: ["就业导向", "可落地路径", "地区资源", "实习机会"]
     },
     {
+      id: "study-cn-pragmatic-choice",
+      scenario: "china-pattern",
+      title: "中国学生选校越来越务实",
+      content: "近年的留学白皮书和公开机构趋势里，一个稳定变化是：越来越多中国学生不会只盯综合排名，而会把就业率、学费、专业排名、申请要求和毕业起薪一起纳入判断。申请建议也要更务实，而不是只讲名校光环。",
+      tags: ["中国学生", "务实选校", "就业率", "学费"]
+    },
+    {
+      id: "study-cn-multi-destination",
+      scenario: "china-pattern",
+      title: "混申和多地区比较变得更常见",
+      content: "中国家庭近年的申请路径越来越常见多地区混申：英美加澳港新会被放到同一决策盘里做比较。对这类用户，建议不能只在单一国家里找最优解，而要给出多条跨地区路线。",
+      tags: ["中国学生", "混申", "多地区", "路线比较"]
+    },
+    {
+      id: "study-cn-stem-shift",
+      scenario: "china-pattern",
+      title: "理工科和医科热度上升",
+      content: "公开白皮书趋势显示，中国学生近年申请偏好更向理工科、计算机、数据、工程和部分医科靠拢，商科相对回落。对于理工背景用户，可以更强调技术准备、项目证据和就业路径的连贯性。",
+      tags: ["中国学生", "理工科", "计算机", "就业趋势"]
+    },
+    {
+      id: "study-cn-document-mismatch",
+      scenario: "china-pattern",
+      title: "中国申请者常见问题是文书和国家逻辑错配",
+      content: "公开机构复盘里，一个高频误区是把英美项目文书用同一套模板写，忽略国家和项目差异。判断申请策略时，要提醒用户：不同国家、不同项目看重的叙事逻辑不一样，不能简单复制。",
+      tags: ["中国学生", "文书", "英美差异", "模板"]
+    },
+    {
+      id: "study-cn-hk-competition",
+      scenario: "hk-sg",
+      title: "中国学生申请港新常见高热高竞争",
+      content: "公开趋势资料反复提到，中国学生对港新热度持续很高，但竞争也明显变强。对港新意向强的用户，建议里应该自然加入梯度控制，不要默认把所有预算和期望都压在最热门项目上。",
+      tags: ["港新", "中国学生", "竞争激烈", "梯度控制"]
+    },
+    {
+      id: "study-cn-budget-rational",
+      scenario: "budget",
+      title: "中国家庭更在意投入产出比",
+      content: "近年的中国留学趋势里，预算和性价比已经从辅助因素变成主决策因素。对预算敏感用户，判断时应该更主动讨论总成本、奖学金、地区资源和毕业去向，而不是简单推荐更贵的学校。",
+      tags: ["中国家庭", "预算", "性价比", "投入产出"]
+    },
+    {
+      id: "study-cn-undergrad-family",
+      scenario: "undergrad",
+      title: "本科申请通常是家庭共同决策",
+      content: "中国学生的本科申请常见特点是家长参与度更高，因此学校支持体系、生活环境、费用、升学出口和安全感会比研究生申请更重要。对本科用户，建议里要把这些现实因素说清楚。",
+      tags: ["本科", "家庭决策", "支持体系", "费用"]
+    },
+    {
       id: "study-positive-outcomes",
       scenario: "career-oriented",
       title: "正向结果样本通常有共同特征",
@@ -570,6 +619,7 @@ function collectScenarios(profile) {
   if (/教育|teaching|education|tesol|curriculum/.test(majorText)) scenarios.add("education");
   if (/法律|法学|policy|public policy|governance|law|international relations/.test(majorText)) scenarios.add("law-policy");
   if (/传媒|传播|media|journalism|communication|film|design|creative/.test(majorText)) scenarios.add("media-design");
+  scenarios.add("china-pattern");
   if (/就业|找工作|实习|留用|落地|移民|求职/.test(`${budgetText}${timelineText}${experienceText}`)) scenarios.add("career-oriented");
   return Array.from(scenarios);
 }
@@ -641,7 +691,7 @@ function buildPrompt(profile, userProfile, snippets) {
 请你担任资深留学申请顾问，基于用户资料生成严肃、具体、可执行的中文申请分析。
 你可以参考两类信息：
 1. 用户自己的历史档案；
-2. 内部知识片段：这些不是照抄原文，而是从公开招生建议、公开申请经验、公开案例总结中蒸馏出的稳定规律。
+2. 内部知识片段：这些不是照抄原文，而是从公开招生建议、公开申请经验、公开案例总结、机构白皮书趋势中蒸馏出的稳定规律。
 
 要求：
 1. 不要承诺录取概率，不要编造具体学校录取数据。
