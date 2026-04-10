@@ -167,6 +167,41 @@ function seedKnowledgeSnippets(db) {
       tags: ["本科", "家庭决策", "支持体系", "费用"]
     },
     {
+      id: "study-cn-cross-major-bridge",
+      scenario: "china-case",
+      title: "中文案例里跨专业成功通常靠桥梁路径",
+      content: "公开中文案例里，跨专业成功往往不是直接硬转，而是通过先修课、预科、桥梁项目、相关工作经验或项目经历把故事接起来。对跨专业用户，系统应优先推荐能承接转向的路径。",
+      tags: ["中国案例", "跨专业", "桥梁路径", "预科"]
+    },
+    {
+      id: "study-cn-double-non-path",
+      scenario: "china-case",
+      title: "双非背景更依赖组合设计",
+      content: "公开中文案例里，双非背景拿到好结果通常更依赖组合设计：少量冲刺、更多匹配、清晰文书主线和可验证经历。系统在判断这类用户时，应该更强调结构，而不是单点冲高。",
+      tags: ["中国案例", "双非", "组合设计", "文书主线"]
+    },
+    {
+      id: "study-cn-foundation-route",
+      scenario: "china-case",
+      title: "本科和转向申请常见预科或衔接路径",
+      content: "公开中文案例显示，本科申请或学术背景不完全匹配时，预科、foundation year 或衔接课程是常见可行路径。系统在推荐本科和转向方案时，应该把衔接路径视作正经选项，而不是失败备胎。",
+      tags: ["中国案例", "本科", "预科", "衔接课程"]
+    },
+    {
+      id: "study-cn-art-portfolio",
+      scenario: "media-design",
+      title: "中文案例里艺术设计更依赖作品集兑现",
+      content: "公开中文艺术设计录取案例里，作品集通常是最关键变量，语言和 GPA 只是基础门槛。系统对设计、传媒、创意方向用户，应优先判断作品证据和表达风格，而不是套用普通专业逻辑。",
+      tags: ["中国案例", "艺术设计", "作品集", "表达风格"]
+    },
+    {
+      id: "study-cn-high-score-upside",
+      scenario: "china-case",
+      title: "高分用户也需要防止申请过窄",
+      content: "中文案例里，高分用户并不等于可以只投顶尖项目。很多正向结果来自高分背景加合理梯度设计，而不是全压头部。系统应提醒高分用户也保留匹配和保底结构。",
+      tags: ["中国案例", "高分", "梯度设计", "风险控制"]
+    },
+    {
       id: "study-positive-outcomes",
       scenario: "career-oriented",
       title: "正向结果样本通常有共同特征",
@@ -620,6 +655,7 @@ function collectScenarios(profile) {
   if (/法律|法学|policy|public policy|governance|law|international relations/.test(majorText)) scenarios.add("law-policy");
   if (/传媒|传播|media|journalism|communication|film|design|creative/.test(majorText)) scenarios.add("media-design");
   scenarios.add("china-pattern");
+  scenarios.add("china-case");
   if (/就业|找工作|实习|留用|落地|移民|求职/.test(`${budgetText}${timelineText}${experienceText}`)) scenarios.add("career-oriented");
   return Array.from(scenarios);
 }
