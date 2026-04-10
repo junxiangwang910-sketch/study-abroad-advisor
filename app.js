@@ -218,13 +218,13 @@ function renderReport(result) {
   insightList.innerHTML = (result.insights || []).map((item) => `<li>${text(item)}</li>`).join("");
   routeList.innerHTML = (result.routes || []).map((item) => `
     <article class="school-card">
-      <h4>${text(item.name || "申请路线")}</h4>
+      <h4>${text(item.name || "申请路线")}${item.label ? ` <span class="route-badge">${text(item.label)}</span>` : ""}</h4>
       <p>${text(item.summary || "")}</p>
     </article>
   `).join("");
   careerPathList.innerHTML = (result.careerPaths || []).map((item) => `
     <article class="school-card">
-      <h4>${text(item.name || "就业路径")}</h4>
+      <h4>${text(item.name || "就业路径")}${item.label ? ` <span class="route-badge">${text(item.label)}</span>` : ""}</h4>
       <p>${text(item.summary || "")}</p>
     </article>
   `).join("");
