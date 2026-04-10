@@ -564,6 +564,19 @@ textarea:focus {
   line-height: 1.65;
 }
 
+.premium-block {
+  background: rgba(15, 92, 108, 0.06);
+  border: 1px solid rgba(15, 92, 108, 0.12);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.premium-block p {
+  margin: 0 0 12px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
 .pricing-section,
 .case-section,
 .sample-section,

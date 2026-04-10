@@ -16,8 +16,12 @@ const scoreMeter = document.querySelector("#scoreMeter");
 const tagRow = document.querySelector("#tagRow");
 const schoolList = document.querySelector("#schoolList");
 const insightList = document.querySelector("#insightList");
+const routeList = document.querySelector("#routeList");
+const careerPathList = document.querySelector("#careerPathList");
 const actionList = document.querySelector("#actionList");
 const timelineList = document.querySelector("#timelineList");
+const premiumLead = document.querySelector("#premiumLead");
+const premiumList = document.querySelector("#premiumList");
 const reportNote = document.querySelector("#reportNote");
 const activationCode = document.querySelector("#activationCode");
 const activateButton = document.querySelector("#activateButton");
@@ -212,8 +216,22 @@ function renderReport(result) {
     </article>
   `).join("");
   insightList.innerHTML = (result.insights || []).map((item) => `<li>${text(item)}</li>`).join("");
+  routeList.innerHTML = (result.routes || []).map((item) => `
+    <article class="school-card">
+      <h4>${text(item.name || "申请路线")}</h4>
+      <p>${text(item.summary || "")}</p>
+    </article>
+  `).join("");
+  careerPathList.innerHTML = (result.careerPaths || []).map((item) => `
+    <article class="school-card">
+      <h4>${text(item.name || "就业路径")}</h4>
+      <p>${text(item.summary || "")}</p>
+    </article>
+  `).join("");
   actionList.innerHTML = (result.improvements || []).map((item) => `<li>${text(item)}</li>`).join("");
   timelineList.innerHTML = (result.roadmap || []).map((item) => `<li>${text(item)}</li>`).join("");
+  premiumLead.textContent = result.premiumLead || "如果你想把路线真正做成录取结果，可以升级 1 对 1 服务。";
+  premiumList.innerHTML = (result.premiumService || []).map((item) => `<li>${text(item)}</li>`).join("");
   reportNote.textContent = `${result.provider === "deepseek" ? "大模型已生成" : "Demo 模式"} · 已结合公开申请经验模式库 · ${result.disclaimer || "本报告不代表录取承诺。"}`;
   renderProfile(result.profile);
 

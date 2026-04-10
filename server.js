@@ -598,6 +598,16 @@ function fallbackAnalysis(profile, userProfile) {
       { tier: "匹配", advice: "选择 5-7 个课程匹配、先修要求明确、就业资源稳定的项目作为主战场。" },
       { tier: "保底", advice: "准备 2-4 个录取规则透明、语言和 GPA 达标概率高的项目兜底。" }
     ],
+    routes: [
+      { name: "名校冲刺路线", summary: "保留少量高竞争项目，重点靠文书、推荐信和经历包装争取上限。" },
+      { name: "稳妥录取路线", summary: "优先选择课程匹配、规则透明、录取更稳的项目，把录取结果先拿住。" },
+      { name: "就业优先路线", summary: "优先看课程和行业连接、实习机会、地区资源与毕业后去向。" }
+    ],
+    careerPaths: [
+      { name: "课程和岗位强匹配路径", summary: "先选能直接补目标行业技能的项目，让毕业去向更容易落地。" },
+      { name: "实习与地区资源联动路径", summary: "优先去实习机会、校友网络和招聘市场更友好的地区和项目。" },
+      { name: "保留长期选择权路径", summary: "如果未来想继续升学或转方向，先选能给后续机会留出空间的项目。" }
+    ],
     insights: [
       "当前报告为兜底分析：服务器尚未配置 DEEPSEEK_API_KEY，配置后会生成更细的个性化报告。",
       userProfile?.recurringRisks?.length ? `你最近几次最常出现的风险点是：${userProfile.recurringRisks.slice(0, 2).join("、")}。` : "第一次使用建议先把目标国家、项目层级和核心经历梳理清楚。",
@@ -613,6 +623,12 @@ function fallbackAnalysis(profile, userProfile) {
       "第 3-5 周：整理简历、推荐信素材包和核心经历故事。",
       "第 6-9 周：完成主文书初稿，并针对冲刺/匹配项目做差异化版本。",
       "第 10-12 周：检查材料一致性，提交保底和第一批匹配项目。"
+    ],
+    premiumLead: "如果你想把最优路线真正走成录取结果，下一步就不是继续自己试错，而是升级 1 对 1 服务。",
+    premiumService: [
+      "先把最适合你的主申路线和备选路线定死，不再来回摇摆。",
+      "从选学校、定项目、梳理背景到申请材料，一条龙推进。",
+      "适合目标名校、本硕博申请、转专业和复杂背景用户。"
     ],
     disclaimer: "本报告是申请策略建议，不代表任何学校的录取承诺。"
   };
@@ -637,9 +653,13 @@ function buildPrompt(profile, userProfile, snippets) {
   "fitScore": 0-100整数,
   "tags": ["4-6个标签"],
   "schoolStrategy": [{"tier":"冲刺/匹配/保底","advice":"具体建议"}],
+  "routes": [{"name":"路线名称","summary":"这条路线适合什么人、核心逻辑是什么"}],
+  "careerPaths": [{"name":"就业路径名称","summary":"为什么这条路径更值得优先考虑"}],
   "insights": ["4-6条核心判断"],
   "improvements": ["4-6条背景补强建议"],
   "roadmap": ["4条90天行动计划"],
+  "premiumLead": "一句升级提示",
+  "premiumService": ["3条为什么应该升级 1 对 1 服务的说明"],
   "disclaimer": "录取不保证说明"
 }
 
