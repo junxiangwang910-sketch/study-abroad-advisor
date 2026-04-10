@@ -590,6 +590,10 @@ textarea:focus {
   line-height: 1.7;
 }
 
+.recommendation-block h3 + p {
+  margin-bottom: 16px;
+}
+
 .pricing-section,
 .case-section,
 .sample-section,

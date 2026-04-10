@@ -18,6 +18,8 @@ const schoolList = document.querySelector("#schoolList");
 const insightList = document.querySelector("#insightList");
 const routeList = document.querySelector("#routeList");
 const careerPathList = document.querySelector("#careerPathList");
+const topRouteText = document.querySelector("#topRouteText");
+const upgradeRouteText = document.querySelector("#upgradeRouteText");
 const actionList = document.querySelector("#actionList");
 const timelineList = document.querySelector("#timelineList");
 const premiumLead = document.querySelector("#premiumLead");
@@ -228,6 +230,8 @@ function renderReport(result) {
       <p>${text(item.summary || "")}</p>
     </article>
   `).join("");
+  topRouteText.textContent = result.topRecommendation || "系统会在这里标出最适合你的主路线。";
+  upgradeRouteText.textContent = result.upgradeRecommendation || "系统会在这里标出最值得交给人工一对一推进的路线。";
   actionList.innerHTML = (result.improvements || []).map((item) => `<li>${text(item)}</li>`).join("");
   timelineList.innerHTML = (result.roadmap || []).map((item) => `<li>${text(item)}</li>`).join("");
   premiumLead.textContent = result.premiumLead || "如果你想把路线真正做成录取结果，可以升级 1 对 1 服务。";

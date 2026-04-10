@@ -630,6 +630,8 @@ function fallbackAnalysis(profile, userProfile) {
       "从选学校、定项目、梳理背景到申请材料，一条龙推进。",
       "适合目标名校、本硕博申请、转专业和复杂背景用户。"
     ],
+    topRecommendation: "系统当前最推荐你先走“就业优先路线”，因为它更容易把课程、技能、实习和毕业去向连成一条真正可落地的路径。",
+    upgradeRecommendation: "如果你准备把结果做成名校录取，最值得升级 1 对 1 的通常是“名校冲刺路线”，因为这条路对选校、文书、推荐信和背景包装的要求最高。",
     disclaimer: "本报告是申请策略建议，不代表任何学校的录取承诺。"
   };
 }
@@ -660,6 +662,8 @@ function buildPrompt(profile, userProfile, snippets) {
   "roadmap": ["4条90天行动计划"],
   "premiumLead": "一句升级提示",
   "premiumService": ["3条为什么应该升级 1 对 1 服务的说明"],
+  "topRecommendation": "一句系统最推荐路线总结",
+  "upgradeRecommendation": "一句最值得升级 1 对 1 的路线总结",
   "disclaimer": "录取不保证说明"
 }
 
